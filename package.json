@@ -1,0 +1,30 @@
+{
+  "name": "parkease",
+  "version": "1.0.0",
+  "description": "ParkEase – Smart Parking Reservation & Management System",
+  "private": true,
+  "scripts": {
+    "dev:backend": "cd backend && node src/app.js",
+    "dev:frontend": "cd frontend && npm run dev",
+    "build:frontend": "cd frontend && npm run build",
+    "install:backend": "cd backend && npm install",
+    "install:frontend": "cd frontend && npm install",
+    "install:all": "npm run install:backend && npm run install:frontend",
+    "start": "cd backend && node src/app.js"
+  },
+  "keywords": [
+    "parking",
+    "smart-parking",
+    "ev-charging",
+    "qr-code",
+    "booking-system",
+    "react",
+    "vite",
+    "tailwindcss",
+    "nodejs",
+    "express",
+    "socketio"
+  ],
+  "author": "Deadshot2009",
+  "license": "MIT"
+}

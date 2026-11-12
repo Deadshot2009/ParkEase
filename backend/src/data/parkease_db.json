@@ -1,0 +1,1433 @@
+{
+  "users": [
+    {
+      "_id": "usr_admin_001",
+      "name": "ParkEase Administrator",
+      "email": "admin@parkease.com",
+      "passwordHash": "$2a$10$NsFuLpAM7Rd.J3vo8.vrxePISGAQsjIDtnSJ62WuNc0SPPwZ54MmG",
+      "role": "admin",
+      "phone": "+91 98765 43210",
+      "avatar": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80",
+      "vehicles": [
+        {
+          "id": "veh_01",
+          "plateNumber": "KA-01-AB-1234",
+          "makeModel": "Tesla Model 3",
+          "type": "EV",
+          "color": "Pearl White"
+        }
+      ],
+      "favorites": [
+        "loc_001",
+        "loc_002"
+      ],
+      "createdAt": "2026-11-12T11:34:53.080Z"
+    },
+    {
+      "_id": "usr_demo_002",
+      "name": "Alex Mercer",
+      "email": "user@parkease.com",
+      "passwordHash": "$2a$10$NsFuLpAM7Rd.J3vo8.vrxeQhRZVwtU1ptrPDujW18Fe1Y8iEMVjw2",
+      "role": "user",
+      "phone": "+91 91234 56789",
+      "avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=200&q=80",
+      "vehicles": [
+        {
+          "id": "veh_02",
+          "plateNumber": "MH-02-CP-8899",
+          "makeModel": "BMW 3 Series M-Sport",
+          "type": "Car",
+          "color": "Tanzanite Blue"
+        },
+        {
+          "id": "veh_03",
+          "plateNumber": "KA-05-EV-4411",
+          "makeModel": "Tata Nexon EV Max",
+          "type": "EV",
+          "color": "Teal Blue"
+        }
+      ],
+      "favorites": [
+        "loc_001",
+        "loc_003"
+      ],
+      "createdAt": "2026-11-12T11:34:53.088Z"
+    }
+  ],
+  "locations": [
+    {
+      "_id": "loc_001",
+      "name": "Grand Central Horizon Plaza",
+      "tagline": "Multi-Level Smart Hub • Covered & EV Equipped",
+      "address": "77 Downtown Avenue, Financial District, Tech Metropolis",
+      "coordinates": {
+        "lat": 28.6139,
+        "lng": 77.209
+      },
+      "distance": "1.2 km away",
+      "pricing": {
+        "hourlyRate": 40,
+        "dayPassRate": 350
+      },
+      "totalSlots": 48,
+      "rating": 4.9,
+      "reviewCount": 342,
+      "operatingHours": "24/7 Mon-Sun",
+      "images": [
+        "https://images.unsplash.com/photo-1506521781263-d8422e82f27a?auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1590674899484-d5640e854abe?auto=format&fit=crop&w=800&q=80"
+      ],
+      "amenities": [
+        "24/7 Security CCTV",
+        "Fast EV Charging",
+        "Automated Boom Barrier",
+        "Car Wash Bay",
+        "Valet Assist",
+        "Covered Roof"
+      ],
+      "floors": [
+        "Ground Floor (G)",
+        "Level 1 (P1)",
+        "Level 2 (P2)"
+      ]
+    },
+    {
+      "_id": "loc_002",
+      "name": "CyberHub Smart Tech Deck",
+      "tagline": "Next-Gen Automated Parking with Sensor Guidance",
+      "address": "Plot 14-A, Silicon Valley Corridor, Sector 5",
+      "coordinates": {
+        "lat": 28.5355,
+        "lng": 77.391
+      },
+      "distance": "2.8 km away",
+      "pricing": {
+        "hourlyRate": 50,
+        "dayPassRate": 420
+      },
+      "totalSlots": 36,
+      "rating": 4.8,
+      "reviewCount": 219,
+      "operatingHours": "06:00 AM - 01:00 AM",
+      "images": [
+        "https://images.unsplash.com/photo-1573348722427-f1d6819fdf98?auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=800&q=80"
+      ],
+      "amenities": [
+        "Rapid CCS2 EV Chargers",
+        "Digital Numberplate Scanner",
+        "Restroom Facility",
+        "Security Guards"
+      ],
+      "floors": [
+        "Level 1 (P1)",
+        "Level 2 (P2)"
+      ]
+    },
+    {
+      "_id": "loc_003",
+      "name": "Skyline Terminal & Airport Express Deck",
+      "tagline": "Long-Stay & Priority Valet with Terminal Shuttles",
+      "address": "Airport Bypass Expressway, Terminal 3 Gate 4",
+      "coordinates": {
+        "lat": 28.5562,
+        "lng": 77.1
+      },
+      "distance": "5.4 km away",
+      "pricing": {
+        "hourlyRate": 60,
+        "dayPassRate": 500
+      },
+      "totalSlots": 40,
+      "rating": 4.95,
+      "reviewCount": 512,
+      "operatingHours": "24/7 Always Open",
+      "images": [
+        "https://images.unsplash.com/photo-1617814076367-b759c7d7e738?auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1517524008697-84bbe3c3fd98?auto=format&fit=crop&w=800&q=80"
+      ],
+      "amenities": [
+        "Free Airport Shuttle",
+        "Luggage Assistance",
+        "Underground Climate Control",
+        "High-Res CCTV",
+        "Fast EV Superchargers"
+      ],
+      "floors": [
+        "Terminal Wing A",
+        "Terminal Wing B"
+      ]
+    },
+    {
+      "_id": "loc_004",
+      "name": "Palms Galleria & Lifestyle Mall",
+      "tagline": "Premium Shopping Mall Parking with Family & Accessible Bays",
+      "address": "808 Promenade Mall Road, Westside Galleria",
+      "coordinates": {
+        "lat": 28.4595,
+        "lng": 77.0266
+      },
+      "distance": "3.6 km away",
+      "pricing": {
+        "hourlyRate": 35,
+        "dayPassRate": 300
+      },
+      "totalSlots": 32,
+      "rating": 4.7,
+      "reviewCount": 180,
+      "operatingHours": "09:00 AM - 12:00 AM",
+      "images": [
+        "https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1?auto=format&fit=crop&w=800&q=80"
+      ],
+      "amenities": [
+        "Direct Mall Elevator Entry",
+        "Accessible Parking",
+        "Family Parking",
+        "Pre-booking Discounts"
+      ],
+      "floors": [
+        "Basement 1 (B1)",
+        "Basement 2 (B2)"
+      ]
+    }
+  ],
+  "slots": [
+    {
+      "_id": "slot_loc001_G_01",
+      "locationId": "loc_001",
+      "slotNumber": "G-01",
+      "floor": "Ground Floor (G)",
+      "type": "EV",
+      "status": "available",
+      "hourlyRate": 50,
+      "features": [
+        "50kW DC Fast Charging",
+        "Universal Type 2 Plug"
+      ],
+      "currentVehicle": null
+    },
+    {
+      "_id": "slot_loc001_G_02",
+      "locationId": "loc_001",
+      "slotNumber": "G-02",
+      "floor": "Ground Floor (G)",
+      "type": "EV",
+      "status": "available",
+      "hourlyRate": 50,
+      "features": [
+        "50kW DC Fast Charging",
+        "Universal Type 2 Plug"
+      ],
+      "currentVehicle": null,
+      "updatedAt": "2026-11-12T11:54:37.900Z"
+    },
+    {
+      "_id": "slot_loc001_G_03",
+      "locationId": "loc_001",
+      "slotNumber": "G-03",
+      "floor": "Ground Floor (G)",
+      "type": "EV",
+      "status": "available",
+      "hourlyRate": 50,
+      "features": [
+        "50kW DC Fast Charging",
+        "Universal Type 2 Plug"
+      ],
+      "currentVehicle": null
+    },
+    {
+      "_id": "slot_loc001_G_04",
+      "locationId": "loc_001",
+      "slotNumber": "G-04",
+      "floor": "Ground Floor (G)",
+      "type": "VIP",
+      "status": "reserved",
+      "hourlyRate": 60,
+      "features": [
+        "Extra Wide Bay",
+        "Direct Elevator Access"
+      ],
+      "currentVehicle": null
+    },
+    {
+      "_id": "slot_loc001_G_05",
+      "locationId": "loc_001",
+      "slotNumber": "G-05",
+      "floor": "Ground Floor (G)",
+      "type": "VIP",
+      "status": "available",
+      "hourlyRate": 60,
+      "features": [
+        "Extra Wide Bay",
+        "Direct Elevator Access"
+      ],
+      "currentVehicle": null
+    },
+    {
+      "_id": "slot_loc001_G_06",
+      "locationId": "loc_001",
+      "slotNumber": "G-06",
+      "floor": "Ground Floor (G)",
+      "type": "Accessible",
+      "status": "available",
+      "hourlyRate": 40,
+      "features": [
+        "Wide Angle Camera Coverage"
+      ],
+      "currentVehicle": null
+    },
+    {
+      "_id": "slot_loc001_G_07",
+      "locationId": "loc_001",
+      "slotNumber": "G-07",
+      "floor": "Ground Floor (G)",
+      "type": "Standard",
+      "status": "booked",
+      "hourlyRate": 40,
+      "features": [
+        "Wide Angle Camera Coverage"
+      ],
+      "currentVehicle": "DL-01-XX-9900"
+    },
+    {
+      "_id": "slot_loc001_G_08",
+      "locationId": "loc_001",
+      "slotNumber": "G-08",
+      "floor": "Ground Floor (G)",
+      "type": "Standard",
+      "status": "available",
+      "hourlyRate": 40,
+      "features": [
+        "Wide Angle Camera Coverage"
+      ],
+      "currentVehicle": null
+    },
+    {
+      "_id": "slot_loc001_G_09",
+      "locationId": "loc_001",
+      "slotNumber": "G-09",
+      "floor": "Ground Floor (G)",
+      "type": "Standard",
+      "status": "available",
+      "hourlyRate": 40,
+      "features": [
+        "Wide Angle Camera Coverage"
+      ],
+      "currentVehicle": null
+    },
+    {
+      "_id": "slot_loc001_G_10",
+      "locationId": "loc_001",
+      "slotNumber": "G-10",
+      "floor": "Ground Floor (G)",
+      "type": "Standard",
+      "status": "available",
+      "hourlyRate": 40,
+      "features": [
+        "Wide Angle Camera Coverage"
+      ],
+      "currentVehicle": null
+    },
+    {
+      "_id": "slot_loc001_G_11",
+      "locationId": "loc_001",
+      "slotNumber": "G-11",
+      "floor": "Ground Floor (G)",
+      "type": "Standard",
+      "status": "available",
+      "hourlyRate": 40,
+      "features": [
+        "Wide Angle Camera Coverage"
+      ],
+      "currentVehicle": null
+    },
+    {
+      "_id": "slot_loc001_G_12",
+      "locationId": "loc_001",
+      "slotNumber": "G-12",
+      "floor": "Ground Floor (G)",
+      "type": "Standard",
+      "status": "booked",
+      "hourlyRate": 40,
+      "features": [
+        "Wide Angle Camera Coverage"
+      ],
+      "currentVehicle": "DL-01-XX-9900"
+    },
+    {
+      "_id": "slot_loc001_G_13",
+      "locationId": "loc_001",
+      "slotNumber": "G-13",
+      "floor": "Ground Floor (G)",
+      "type": "Standard",
+      "status": "available",
+      "hourlyRate": 40,
+      "features": [
+        "Wide Angle Camera Coverage"
+      ],
+      "currentVehicle": null
+    },
+    {
+      "_id": "slot_loc001_G_14",
+      "locationId": "loc_001",
+      "slotNumber": "G-14",
+      "floor": "Ground Floor (G)",
+      "type": "Standard",
+      "status": "available",
+      "hourlyRate": 40,
+      "features": [
+        "Wide Angle Camera Coverage"
+      ],
+      "currentVehicle": null
+    },
+    {
+      "_id": "slot_loc001_G_15",
+      "locationId": "loc_001",
+      "slotNumber": "G-15",
+      "floor": "Ground Floor (G)",
+      "type": "Standard",
+      "status": "available",
+      "hourlyRate": 40,
+      "features": [
+        "Wide Angle Camera Coverage"
+      ],
+      "currentVehicle": null
+    },
+    {
+      "_id": "slot_loc001_G_16",
+      "locationId": "loc_001",
+      "slotNumber": "G-16",
+      "floor": "Ground Floor (G)",
+      "type": "Standard",
+      "status": "available",
+      "hourlyRate": 40,
+      "features": [
+        "Wide Angle Camera Coverage"
+      ],
+      "currentVehicle": null
+    },
+    {
+      "_id": "slot_loc001_P1_01",
+      "locationId": "loc_001",
+      "slotNumber": "P1-01",
+      "floor": "Level 1 (P1)",
+      "type": "EV",
+      "status": "available",
+      "hourlyRate": 50,
+      "features": [
+        "50kW DC Fast Charging",
+        "Universal Type 2 Plug"
+      ],
+      "currentVehicle": null
+    },
+    {
+      "_id": "slot_loc001_P1_02",
+      "locationId": "loc_001",
+      "slotNumber": "P1-02",
+      "floor": "Level 1 (P1)",
+      "type": "EV",
+      "status": "available",
+      "hourlyRate": 50,
+      "features": [
+        "50kW DC Fast Charging",
+        "Universal Type 2 Plug"
+      ],
+      "currentVehicle": null
+    },
+    {
+      "_id": "slot_loc001_P1_03",
+      "locationId": "loc_001",
+      "slotNumber": "P1-03",
+      "floor": "Level 1 (P1)",
+      "type": "EV",
+      "status": "booked",
+      "hourlyRate": 50,
+      "features": [
+        "50kW DC Fast Charging",
+        "Universal Type 2 Plug"
+      ],
+      "currentVehicle": "DL-01-XX-9900"
+    },
+    {
+      "_id": "slot_loc001_P1_04",
+      "locationId": "loc_001",
+      "slotNumber": "P1-04",
+      "floor": "Level 1 (P1)",
+      "type": "VIP",
+      "status": "available",
+      "hourlyRate": 60,
+      "features": [
+        "Extra Wide Bay",
+        "Direct Elevator Access"
+      ],
+      "currentVehicle": null
+    },
+    {
+      "_id": "slot_loc001_P1_05",
+      "locationId": "loc_001",
+      "slotNumber": "P1-05",
+      "floor": "Level 1 (P1)",
+      "type": "VIP",
+      "status": "available",
+      "hourlyRate": 60,
+      "features": [
+        "Extra Wide Bay",
+        "Direct Elevator Access"
+      ],
+      "currentVehicle": null
+    },
+    {
+      "_id": "slot_loc001_P1_06",
+      "locationId": "loc_001",
+      "slotNumber": "P1-06",
+      "floor": "Level 1 (P1)",
+      "type": "Accessible",
+      "status": "available",
+      "hourlyRate": 40,
+      "features": [
+        "Wide Angle Camera Coverage"
+      ],
+      "currentVehicle": null
+    },
+    {
+      "_id": "slot_loc001_P1_07",
+      "locationId": "loc_001",
+      "slotNumber": "P1-07",
+      "floor": "Level 1 (P1)",
+      "type": "Standard",
+      "status": "available",
+      "hourlyRate": 40,
+      "features": [
+        "Wide Angle Camera Coverage"
+      ],
+      "currentVehicle": null
+    },
+    {
+      "_id": "slot_loc001_P1_08",
+      "locationId": "loc_001",
+      "slotNumber": "P1-08",
+      "floor": "Level 1 (P1)",
+      "type": "Standard",
+      "status": "booked",
+      "hourlyRate": 40,
+      "features": [
+        "Wide Angle Camera Coverage"
+      ],
+      "currentVehicle": "DL-01-XX-9900"
+    },
+    {
+      "_id": "slot_loc001_P1_09",
+      "locationId": "loc_001",
+      "slotNumber": "P1-09",
+      "floor": "Level 1 (P1)",
+      "type": "Standard",
+      "status": "available",
+      "hourlyRate": 40,
+      "features": [
+        "Wide Angle Camera Coverage"
+      ],
+      "currentVehicle": null
+    },
+    {
+      "_id": "slot_loc001_P1_10",
+      "locationId": "loc_001",
+      "slotNumber": "P1-10",
+      "floor": "Level 1 (P1)",
+      "type": "Standard",
+      "status": "available",
+      "hourlyRate": 40,
+      "features": [
+        "Wide Angle Camera Coverage"
+      ],
+      "currentVehicle": null
+    },
+    {
+      "_id": "slot_loc001_P1_11",
+      "locationId": "loc_001",
+      "slotNumber": "P1-11",
+      "floor": "Level 1 (P1)",
+      "type": "Standard",
+      "status": "available",
+      "hourlyRate": 40,
+      "features": [
+        "Wide Angle Camera Coverage"
+      ],
+      "currentVehicle": null
+    },
+    {
+      "_id": "slot_loc001_P1_12",
+      "locationId": "loc_001",
+      "slotNumber": "P1-12",
+      "floor": "Level 1 (P1)",
+      "type": "Standard",
+      "status": "available",
+      "hourlyRate": 40,
+      "features": [
+        "Wide Angle Camera Coverage"
+      ],
+      "currentVehicle": null
+    },
+    {
+      "_id": "slot_loc001_P1_13",
+      "locationId": "loc_001",
+      "slotNumber": "P1-13",
+      "floor": "Level 1 (P1)",
+      "type": "Standard",
+      "status": "available",
+      "hourlyRate": 40,
+      "features": [
+        "Wide Angle Camera Coverage"
+      ],
+      "currentVehicle": null
+    },
+    {
+      "_id": "slot_loc001_P1_14",
+      "locationId": "loc_001",
+      "slotNumber": "P1-14",
+      "floor": "Level 1 (P1)",
+      "type": "Standard",
+      "status": "available",
+      "hourlyRate": 40,
+      "features": [
+        "Wide Angle Camera Coverage"
+      ],
+      "currentVehicle": null
+    },
+    {
+      "_id": "slot_loc001_P1_15",
+      "locationId": "loc_001",
+      "slotNumber": "P1-15",
+      "floor": "Level 1 (P1)",
+      "type": "Standard",
+      "status": "available",
+      "hourlyRate": 40,
+      "features": [
+        "Wide Angle Camera Coverage"
+      ],
+      "currentVehicle": null
+    },
+    {
+      "_id": "slot_loc001_P1_16",
+      "locationId": "loc_001",
+      "slotNumber": "P1-16",
+      "floor": "Level 1 (P1)",
+      "type": "Standard",
+      "status": "available",
+      "hourlyRate": 40,
+      "features": [
+        "Wide Angle Camera Coverage"
+      ],
+      "currentVehicle": null
+    },
+    {
+      "_id": "slot_loc001_P2_01",
+      "locationId": "loc_001",
+      "slotNumber": "P2-01",
+      "floor": "Level 2 (P2)",
+      "type": "EV",
+      "status": "available",
+      "hourlyRate": 50,
+      "features": [
+        "50kW DC Fast Charging",
+        "Universal Type 2 Plug"
+      ],
+      "currentVehicle": null
+    },
+    {
+      "_id": "slot_loc001_P2_02",
+      "locationId": "loc_001",
+      "slotNumber": "P2-02",
+      "floor": "Level 2 (P2)",
+      "type": "EV",
+      "status": "available",
+      "hourlyRate": 50,
+      "features": [
+        "50kW DC Fast Charging",
+        "Universal Type 2 Plug"
+      ],
+      "currentVehicle": null
+    },
+    {
+      "_id": "slot_loc001_P2_03",
+      "locationId": "loc_001",
+      "slotNumber": "P2-03",
+      "floor": "Level 2 (P2)",
+      "type": "EV",
+      "status": "available",
+      "hourlyRate": 50,
+      "features": [
+        "50kW DC Fast Charging",
+        "Universal Type 2 Plug"
+      ],
+      "currentVehicle": null
+    },
+    {
+      "_id": "slot_loc001_P2_04",
+      "locationId": "loc_001",
+      "slotNumber": "P2-04",
+      "floor": "Level 2 (P2)",
+      "type": "VIP",
+      "status": "available",
+      "hourlyRate": 60,
+      "features": [
+        "Extra Wide Bay",
+        "Direct Elevator Access"
+      ],
+      "currentVehicle": null
+    },
+    {
+      "_id": "slot_loc001_P2_05",
+      "locationId": "loc_001",
+      "slotNumber": "P2-05",
+      "floor": "Level 2 (P2)",
+      "type": "VIP",
+      "status": "available",
+      "hourlyRate": 60,
+      "features": [
+        "Extra Wide Bay",
+        "Direct Elevator Access"
+      ],
+      "currentVehicle": null
+    },
+    {
+      "_id": "slot_loc001_P2_06",
+      "locationId": "loc_001",
+      "slotNumber": "P2-06",
+      "floor": "Level 2 (P2)",
+      "type": "Accessible",
+      "status": "available",
+      "hourlyRate": 40,
+      "features": [
+        "Wide Angle Camera Coverage"
+      ],
+      "currentVehicle": null
+    },
+    {
+      "_id": "slot_loc001_P2_07",
+      "locationId": "loc_001",
+      "slotNumber": "P2-07",
+      "floor": "Level 2 (P2)",
+      "type": "Standard",
+      "status": "available",
+      "hourlyRate": 40,
+      "features": [
+        "Wide Angle Camera Coverage"
+      ],
+      "currentVehicle": null
+    },
+    {
+      "_id": "slot_loc001_P2_08",
+      "locationId": "loc_001",
+      "slotNumber": "P2-08",
+      "floor": "Level 2 (P2)",
+      "type": "Standard",
+      "status": "available",
+      "hourlyRate": 40,
+      "features": [
+        "Wide Angle Camera Coverage"
+      ],
+      "currentVehicle": null
+    },
+    {
+      "_id": "slot_loc001_P2_09",
+      "locationId": "loc_001",
+      "slotNumber": "P2-09",
+      "floor": "Level 2 (P2)",
+      "type": "Standard",
+      "status": "available",
+      "hourlyRate": 40,
+      "features": [
+        "Wide Angle Camera Coverage"
+      ],
+      "currentVehicle": null
+    },
+    {
+      "_id": "slot_loc001_P2_10",
+      "locationId": "loc_001",
+      "slotNumber": "P2-10",
+      "floor": "Level 2 (P2)",
+      "type": "Standard",
+      "status": "available",
+      "hourlyRate": 40,
+      "features": [
+        "Wide Angle Camera Coverage"
+      ],
+      "currentVehicle": null
+    },
+    {
+      "_id": "slot_loc001_P2_11",
+      "locationId": "loc_001",
+      "slotNumber": "P2-11",
+      "floor": "Level 2 (P2)",
+      "type": "Standard",
+      "status": "available",
+      "hourlyRate": 40,
+      "features": [
+        "Wide Angle Camera Coverage"
+      ],
+      "currentVehicle": null
+    },
+    {
+      "_id": "slot_loc001_P2_12",
+      "locationId": "loc_001",
+      "slotNumber": "P2-12",
+      "floor": "Level 2 (P2)",
+      "type": "Standard",
+      "status": "available",
+      "hourlyRate": 40,
+      "features": [
+        "Wide Angle Camera Coverage"
+      ],
+      "currentVehicle": null
+    },
+    {
+      "_id": "slot_loc001_P2_13",
+      "locationId": "loc_001",
+      "slotNumber": "P2-13",
+      "floor": "Level 2 (P2)",
+      "type": "Standard",
+      "status": "available",
+      "hourlyRate": 40,
+      "features": [
+        "Wide Angle Camera Coverage"
+      ],
+      "currentVehicle": null
+    },
+    {
+      "_id": "slot_loc001_P2_14",
+      "locationId": "loc_001",
+      "slotNumber": "P2-14",
+      "floor": "Level 2 (P2)",
+      "type": "Standard",
+      "status": "available",
+      "hourlyRate": 40,
+      "features": [
+        "Wide Angle Camera Coverage"
+      ],
+      "currentVehicle": null
+    },
+    {
+      "_id": "slot_loc001_P2_15",
+      "locationId": "loc_001",
+      "slotNumber": "P2-15",
+      "floor": "Level 2 (P2)",
+      "type": "Standard",
+      "status": "unavailable",
+      "hourlyRate": 40,
+      "features": [
+        "Wide Angle Camera Coverage"
+      ],
+      "currentVehicle": null
+    },
+    {
+      "_id": "slot_loc001_P2_16",
+      "locationId": "loc_001",
+      "slotNumber": "P2-16",
+      "floor": "Level 2 (P2)",
+      "type": "Standard",
+      "status": "available",
+      "hourlyRate": 40,
+      "features": [
+        "Wide Angle Camera Coverage"
+      ],
+      "currentVehicle": null
+    },
+    {
+      "_id": "slot_loc002_P1_01",
+      "locationId": "loc_002",
+      "slotNumber": "P1-01",
+      "floor": "Level 1 (P1)",
+      "type": "EV",
+      "status": "available",
+      "hourlyRate": 65,
+      "features": [
+        "60kW Rapid Charger"
+      ],
+      "currentVehicle": null
+    },
+    {
+      "_id": "slot_loc002_P1_02",
+      "locationId": "loc_002",
+      "slotNumber": "P1-02",
+      "floor": "Level 1 (P1)",
+      "type": "EV",
+      "status": "booked",
+      "hourlyRate": 65,
+      "features": [
+        "60kW Rapid Charger"
+      ],
+      "currentVehicle": "KA-03-ZZ-3344"
+    },
+    {
+      "_id": "slot_loc002_P1_03",
+      "locationId": "loc_002",
+      "slotNumber": "P1-03",
+      "floor": "Level 1 (P1)",
+      "type": "EV",
+      "status": "available",
+      "hourlyRate": 65,
+      "features": [
+        "60kW Rapid Charger"
+      ],
+      "currentVehicle": null
+    },
+    {
+      "_id": "slot_loc002_P1_04",
+      "locationId": "loc_002",
+      "slotNumber": "P1-04",
+      "floor": "Level 1 (P1)",
+      "type": "EV",
+      "status": "available",
+      "hourlyRate": 65,
+      "features": [
+        "60kW Rapid Charger"
+      ],
+      "currentVehicle": null
+    },
+    {
+      "_id": "slot_loc002_P1_05",
+      "locationId": "loc_002",
+      "slotNumber": "P1-05",
+      "floor": "Level 1 (P1)",
+      "type": "VIP",
+      "status": "reserved",
+      "hourlyRate": 75,
+      "features": [
+        "Sensor Protected"
+      ],
+      "currentVehicle": null
+    },
+    {
+      "_id": "slot_loc002_P1_06",
+      "locationId": "loc_002",
+      "slotNumber": "P1-06",
+      "floor": "Level 1 (P1)",
+      "type": "VIP",
+      "status": "available",
+      "hourlyRate": 75,
+      "features": [
+        "Sensor Protected"
+      ],
+      "currentVehicle": null
+    },
+    {
+      "_id": "slot_loc002_P1_07",
+      "locationId": "loc_002",
+      "slotNumber": "P1-07",
+      "floor": "Level 1 (P1)",
+      "type": "Standard",
+      "status": "available",
+      "hourlyRate": 50,
+      "features": [
+        "Sensor Protected"
+      ],
+      "currentVehicle": null
+    },
+    {
+      "_id": "slot_loc002_P1_08",
+      "locationId": "loc_002",
+      "slotNumber": "P1-08",
+      "floor": "Level 1 (P1)",
+      "type": "Standard",
+      "status": "available",
+      "hourlyRate": 50,
+      "features": [
+        "Sensor Protected"
+      ],
+      "currentVehicle": null
+    },
+    {
+      "_id": "slot_loc002_P1_09",
+      "locationId": "loc_002",
+      "slotNumber": "P1-09",
+      "floor": "Level 1 (P1)",
+      "type": "Standard",
+      "status": "booked",
+      "hourlyRate": 50,
+      "features": [
+        "Sensor Protected"
+      ],
+      "currentVehicle": "KA-03-ZZ-3344"
+    },
+    {
+      "_id": "slot_loc002_P1_10",
+      "locationId": "loc_002",
+      "slotNumber": "P1-10",
+      "floor": "Level 1 (P1)",
+      "type": "Standard",
+      "status": "available",
+      "hourlyRate": 50,
+      "features": [
+        "Sensor Protected"
+      ],
+      "currentVehicle": null
+    },
+    {
+      "_id": "slot_loc002_P1_11",
+      "locationId": "loc_002",
+      "slotNumber": "P1-11",
+      "floor": "Level 1 (P1)",
+      "type": "Standard",
+      "status": "available",
+      "hourlyRate": 50,
+      "features": [
+        "Sensor Protected"
+      ],
+      "currentVehicle": null
+    },
+    {
+      "_id": "slot_loc002_P1_12",
+      "locationId": "loc_002",
+      "slotNumber": "P1-12",
+      "floor": "Level 1 (P1)",
+      "type": "Standard",
+      "status": "available",
+      "hourlyRate": 50,
+      "features": [
+        "Sensor Protected"
+      ],
+      "currentVehicle": null
+    },
+    {
+      "_id": "slot_loc002_P1_13",
+      "locationId": "loc_002",
+      "slotNumber": "P1-13",
+      "floor": "Level 1 (P1)",
+      "type": "Standard",
+      "status": "available",
+      "hourlyRate": 50,
+      "features": [
+        "Sensor Protected"
+      ],
+      "currentVehicle": null
+    },
+    {
+      "_id": "slot_loc002_P1_14",
+      "locationId": "loc_002",
+      "slotNumber": "P1-14",
+      "floor": "Level 1 (P1)",
+      "type": "Standard",
+      "status": "available",
+      "hourlyRate": 50,
+      "features": [
+        "Sensor Protected"
+      ],
+      "currentVehicle": null
+    },
+    {
+      "_id": "slot_loc002_P1_15",
+      "locationId": "loc_002",
+      "slotNumber": "P1-15",
+      "floor": "Level 1 (P1)",
+      "type": "Standard",
+      "status": "available",
+      "hourlyRate": 50,
+      "features": [
+        "Sensor Protected"
+      ],
+      "currentVehicle": null
+    },
+    {
+      "_id": "slot_loc002_P1_16",
+      "locationId": "loc_002",
+      "slotNumber": "P1-16",
+      "floor": "Level 1 (P1)",
+      "type": "Standard",
+      "status": "available",
+      "hourlyRate": 50,
+      "features": [
+        "Sensor Protected"
+      ],
+      "currentVehicle": null
+    },
+    {
+      "_id": "slot_loc002_P1_17",
+      "locationId": "loc_002",
+      "slotNumber": "P1-17",
+      "floor": "Level 1 (P1)",
+      "type": "Standard",
+      "status": "available",
+      "hourlyRate": 50,
+      "features": [
+        "Sensor Protected"
+      ],
+      "currentVehicle": null
+    },
+    {
+      "_id": "slot_loc002_P1_18",
+      "locationId": "loc_002",
+      "slotNumber": "P1-18",
+      "floor": "Level 1 (P1)",
+      "type": "Standard",
+      "status": "available",
+      "hourlyRate": 50,
+      "features": [
+        "Sensor Protected"
+      ],
+      "currentVehicle": null
+    },
+    {
+      "_id": "slot_loc002_P2_01",
+      "locationId": "loc_002",
+      "slotNumber": "P2-01",
+      "floor": "Level 2 (P2)",
+      "type": "EV",
+      "status": "available",
+      "hourlyRate": 65,
+      "features": [
+        "60kW Rapid Charger"
+      ],
+      "currentVehicle": null
+    },
+    {
+      "_id": "slot_loc002_P2_02",
+      "locationId": "loc_002",
+      "slotNumber": "P2-02",
+      "floor": "Level 2 (P2)",
+      "type": "EV",
+      "status": "booked",
+      "hourlyRate": 65,
+      "features": [
+        "60kW Rapid Charger"
+      ],
+      "currentVehicle": "KA-03-ZZ-3344"
+    },
+    {
+      "_id": "slot_loc002_P2_03",
+      "locationId": "loc_002",
+      "slotNumber": "P2-03",
+      "floor": "Level 2 (P2)",
+      "type": "EV",
+      "status": "available",
+      "hourlyRate": 65,
+      "features": [
+        "60kW Rapid Charger"
+      ],
+      "currentVehicle": null
+    },
+    {
+      "_id": "slot_loc002_P2_04",
+      "locationId": "loc_002",
+      "slotNumber": "P2-04",
+      "floor": "Level 2 (P2)",
+      "type": "EV",
+      "status": "available",
+      "hourlyRate": 65,
+      "features": [
+        "60kW Rapid Charger"
+      ],
+      "currentVehicle": null
+    },
+    {
+      "_id": "slot_loc002_P2_05",
+      "locationId": "loc_002",
+      "slotNumber": "P2-05",
+      "floor": "Level 2 (P2)",
+      "type": "VIP",
+      "status": "reserved",
+      "hourlyRate": 75,
+      "features": [
+        "Sensor Protected"
+      ],
+      "currentVehicle": null
+    },
+    {
+      "_id": "slot_loc002_P2_06",
+      "locationId": "loc_002",
+      "slotNumber": "P2-06",
+      "floor": "Level 2 (P2)",
+      "type": "VIP",
+      "status": "available",
+      "hourlyRate": 75,
+      "features": [
+        "Sensor Protected"
+      ],
+      "currentVehicle": null
+    },
+    {
+      "_id": "slot_loc002_P2_07",
+      "locationId": "loc_002",
+      "slotNumber": "P2-07",
+      "floor": "Level 2 (P2)",
+      "type": "Standard",
+      "status": "available",
+      "hourlyRate": 50,
+      "features": [
+        "Sensor Protected"
+      ],
+      "currentVehicle": null
+    },
+    {
+      "_id": "slot_loc002_P2_08",
+      "locationId": "loc_002",
+      "slotNumber": "P2-08",
+      "floor": "Level 2 (P2)",
+      "type": "Standard",
+      "status": "available",
+      "hourlyRate": 50,
+      "features": [
+        "Sensor Protected"
+      ],
+      "currentVehicle": null
+    },
+    {
+      "_id": "slot_loc002_P2_09",
+      "locationId": "loc_002",
+      "slotNumber": "P2-09",
+      "floor": "Level 2 (P2)",
+      "type": "Standard",
+      "status": "booked",
+      "hourlyRate": 50,
+      "features": [
+        "Sensor Protected"
+      ],
+      "currentVehicle": "KA-03-ZZ-3344"
+    },
+    {
+      "_id": "slot_loc002_P2_10",
+      "locationId": "loc_002",
+      "slotNumber": "P2-10",
+      "floor": "Level 2 (P2)",
+      "type": "Standard",
+      "status": "available",
+      "hourlyRate": 50,
+      "features": [
+        "Sensor Protected"
+      ],
+      "currentVehicle": null
+    },
+    {
+      "_id": "slot_loc002_P2_11",
+      "locationId": "loc_002",
+      "slotNumber": "P2-11",
+      "floor": "Level 2 (P2)",
+      "type": "Standard",
+      "status": "available",
+      "hourlyRate": 50,
+      "features": [
+        "Sensor Protected"
+      ],
+      "currentVehicle": null
+    },
+    {
+      "_id": "slot_loc002_P2_12",
+      "locationId": "loc_002",
+      "slotNumber": "P2-12",
+      "floor": "Level 2 (P2)",
+      "type": "Standard",
+      "status": "available",
+      "hourlyRate": 50,
+      "features": [
+        "Sensor Protected"
+      ],
+      "currentVehicle": null
+    },
+    {
+      "_id": "slot_loc002_P2_13",
+      "locationId": "loc_002",
+      "slotNumber": "P2-13",
+      "floor": "Level 2 (P2)",
+      "type": "Standard",
+      "status": "available",
+      "hourlyRate": 50,
+      "features": [
+        "Sensor Protected"
+      ],
+      "currentVehicle": null
+    },
+    {
+      "_id": "slot_loc002_P2_14",
+      "locationId": "loc_002",
+      "slotNumber": "P2-14",
+      "floor": "Level 2 (P2)",
+      "type": "Standard",
+      "status": "available",
+      "hourlyRate": 50,
+      "features": [
+        "Sensor Protected"
+      ],
+      "currentVehicle": null
+    },
+    {
+      "_id": "slot_loc002_P2_15",
+      "locationId": "loc_002",
+      "slotNumber": "P2-15",
+      "floor": "Level 2 (P2)",
+      "type": "Standard",
+      "status": "available",
+      "hourlyRate": 50,
+      "features": [
+        "Sensor Protected"
+      ],
+      "currentVehicle": null
+    },
+    {
+      "_id": "slot_loc002_P2_16",
+      "locationId": "loc_002",
+      "slotNumber": "P2-16",
+      "floor": "Level 2 (P2)",
+      "type": "Standard",
+      "status": "available",
+      "hourlyRate": 50,
+      "features": [
+        "Sensor Protected"
+      ],
+      "currentVehicle": null
+    },
+    {
+      "_id": "slot_loc002_P2_17",
+      "locationId": "loc_002",
+      "slotNumber": "P2-17",
+      "floor": "Level 2 (P2)",
+      "type": "Standard",
+      "status": "available",
+      "hourlyRate": 50,
+      "features": [
+        "Sensor Protected"
+      ],
+      "currentVehicle": null
+    },
+    {
+      "_id": "slot_loc002_P2_18",
+      "locationId": "loc_002",
+      "slotNumber": "P2-18",
+      "floor": "Level 2 (P2)",
+      "type": "Standard",
+      "status": "available",
+      "hourlyRate": 50,
+      "features": [
+        "Sensor Protected"
+      ],
+      "currentVehicle": null
+    }
+  ],
+  "bookings": [
+    {
+      "_id": "bk_demo_1001",
+      "bookingReference": "PE-2026-90412",
+      "userId": "usr_demo_002",
+      "userName": "Alex Mercer",
+      "userEmail": "user@parkease.com",
+      "userPhone": "+91 91234 56789",
+      "locationId": "loc_001",
+      "locationName": "Grand Central Horizon Plaza",
+      "locationAddress": "77 Downtown Avenue, Financial District, Tech Metropolis",
+      "slotId": "slot_loc001_G_02",
+      "slotNumber": "G-02",
+      "floor": "Ground Floor (G)",
+      "slotType": "EV",
+      "vehicle": {
+        "plateNumber": "MH-02-CP-8899",
+        "makeModel": "BMW 3 Series M-Sport",
+        "type": "Car"
+      },
+      "startTime": "2026-11-12T10:49:53.089Z",
+      "endTime": "2026-11-12T13:49:53.089Z",
+      "durationHours": 3,
+      "ratePerHour": 50,
+      "subtotal": 150,
+      "taxes": 27,
+      "totalAmount": 177,
+      "paymentStatus": "PAID",
+      "paymentMethod": "UPI / Google Pay",
+      "paymentReference": "UPI-RAZORPAY-882941042",
+      "bookingStatus": "COMPLETED",
+      "qrCodeData": "{\"bookingRef\":\"PE-2026-90412\",\"slot\":\"G-02\",\"locationId\":\"loc_001\",\"plateNumber\":\"MH-02-CP-8899\",\"validUntil\":\"2026-11-12T13:49:53.089Z\",\"token\":\"SECURE_GATE_TOKEN_9921_OK\"}",
+      "entryTime": "2026-11-12T11:04:53.089Z",
+      "exitTime": "2026-11-12T11:54:37.899Z",
+      "createdAt": "2026-11-12T10:34:53.089Z",
+      "updatedAt": "2026-11-12T11:54:37.899Z"
+    },
+    {
+      "_id": "bk_demo_1000",
+      "bookingReference": "PE-2026-87140",
+      "userId": "usr_demo_002",
+      "userName": "Alex Mercer",
+      "userEmail": "user@parkease.com",
+      "userPhone": "+91 91234 56789",
+      "locationId": "loc_001",
+      "locationName": "Grand Central Horizon Plaza",
+      "locationAddress": "77 Downtown Avenue, Financial District, Tech Metropolis",
+      "slotId": "slot_loc001_G_07",
+      "slotNumber": "G-07",
+      "floor": "Ground Floor (G)",
+      "slotType": "Standard",
+      "vehicle": {
+        "plateNumber": "MH-02-CP-8899",
+        "makeModel": "BMW 3 Series M-Sport",
+        "type": "Car"
+      },
+      "startTime": "2026-11-10T11:34:53.089Z",
+      "endTime": "2026-11-10T13:34:53.089Z",
+      "durationHours": 2,
+      "ratePerHour": 40,
+      "subtotal": 80,
+      "taxes": 14.4,
+      "totalAmount": 94.4,
+      "paymentStatus": "PAID",
+      "paymentMethod": "UPI / PhonePe",
+      "paymentReference": "UPI-RAZORPAY-771920311",
+      "bookingStatus": "COMPLETED",
+      "qrCodeData": "{\"bookingRef\":\"PE-2026-87140\",\"slot\":\"G-07\",\"locationId\":\"loc_001\"}",
+      "entryTime": "2026-11-10T11:39:53.089Z",
+      "exitTime": "2026-11-10T13:34:03.089Z",
+      "createdAt": "2026-11-10T11:04:53.089Z"
+    }
+  ],
+  "payments": [
+    {
+      "_id": "pay_001",
+      "bookingId": "bk_demo_1001",
+      "bookingReference": "PE-2026-90412",
+      "userId": "usr_demo_002",
+      "userName": "Alex Mercer",
+      "amount": 177,
+      "currency": "INR",
+      "method": "UPI (Google Pay)",
+      "upiId": "alexmercer@okaxis",
+      "status": "SUCCESS",
+      "transactionId": "TXN_UPI_983712984",
+      "createdAt": "2026-11-12T10:34:53.089Z"
+    },
+    {
+      "_id": "pay_002",
+      "bookingId": "bk_demo_1000",
+      "bookingReference": "PE-2026-87140",
+      "userId": "usr_demo_002",
+      "userName": "Alex Mercer",
+      "amount": 94.4,
+      "currency": "INR",
+      "method": "UPI (PhonePe)",
+      "upiId": "alexmercer@ybl",
+      "status": "SUCCESS",
+      "transactionId": "TXN_UPI_652199843",
+      "createdAt": "2026-11-10T11:04:53.089Z"
+    }
+  ],
+  "vehicles": [],
+  "entryLogs": [
+    {
+      "_id": "log_9bf609a1",
+      "bookingId": "bk_demo_1001",
+      "bookingReference": "PE-2026-90412",
+      "slotNumber": "G-02",
+      "plateNumber": "MH-02-CP-8899",
+      "action": "EXIT",
+      "scannedAt": "2026-11-12T11:54:37.899Z",
+      "verifiedBy": "Gate Barrier 01",
+      "status": "BARRIER_OPENED"
+    },
+    {
+      "_id": "log_001",
+      "bookingId": "bk_demo_1001",
+      "bookingReference": "PE-2026-90412",
+      "slotNumber": "G-02",
+      "plateNumber": "MH-02-CP-8899",
+      "action": "ENTRY",
+      "scannedAt": "2026-11-12T11:04:53.089Z",
+      "verifiedBy": "Gate Scanner #01-A",
+      "status": "VERIFIED"
+    }
+  ],
+  "reviews": []
+}
