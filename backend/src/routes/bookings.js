@@ -1,7 +1,7 @@
 import express from 'express';
 import { v4 as uuidv4 } from 'uuid';
 import QRCode from 'qrcode';
-import { findOne, findMany, insertOne, updateOne } from '../utils/dataStore.js';
+import { findOne, findMany, insertOne, updateOne, acquireLock, releaseLock } from '../utils/dataStore.js';
 import { protect } from '../middleware/auth.js';
 import { broadcastSlotUpdate } from '../socket/socketHandler.js';
 
@@ -32,154 +32,190 @@ router.post('/', protect, async (req, res) => {
     }
 
     // 1. Fetch location and slot
-    const location = findOne('locations', l => l._id === locationId);
-    if (!location) {
-      return res.status(404).json({ success: false, message: 'Location not found' });
-    }
-
-    const slot = findOne('slots', s => s._id === slotId && s.locationId === locationId);
-    if (!slot) {
-      return res.status(404).json({ success: false, message: 'Parking slot not found' });
-    }
-
-    if (slot.status === 'unavailable') {
-      return res.status(400).json({ success: false, message: 'This slot is currently under maintenance or unavailable' });
-    }
-
-    // 2. Overlap & Concurrency Check (Anti Double-Booking Validation)
-    const reqStart = new Date(startTime).getTime();
-    const reqEnd = new Date(endTime).getTime();
-
-    if (reqStart >= reqEnd) {
-      return res.status(400).json({ success: false, message: 'End time must be after start time' });
-    }
-
-    const existingBookings = findMany('bookings', b =>
-      b.slotId === slotId &&
-      (b.bookingStatus === 'ACTIVE' || b.bookingStatus === 'CONFIRMED')
-    );
-
-    const hasConflict = existingBookings.some(b => {
-      const bStart = new Date(b.startTime).getTime();
-      const bEnd = new Date(b.endTime).getTime();
-      return (reqStart < bEnd && reqEnd > bStart);
-    });
-
-    if (hasConflict) {
-      return res.status(409).json({
+    const lockKey = `slot_booking_${slotId}`;
+    if (!acquireLock(lockKey, 10000)) {
+      return res.status(429).json({
         success: false,
-        message: 'This slot has just been reserved by another user for the selected time window. Please choose another slot.'
+        message: 'A booking reservation is already being processed for this slot. Please wait a moment.'
       });
     }
 
-    // 3. Pricing Calculation based on exact duration and slot type
-    const duration = Math.max(1, parseFloat(durationHours) || Math.ceil((reqEnd - reqStart) / (1000 * 60 * 60)));
-    const ratePerHour = slot.hourlyRate || location.pricing.hourlyRate || 40;
-    const subtotal = Math.round(ratePerHour * duration);
-    const taxes = Math.round(subtotal * 0.18 * 100) / 100; // 18% GST
-    const totalAmount = Math.round(subtotal + taxes);
-
-    const bookingRef = generateBookingRef();
-    const bookingId = `bk_${uuidv4().substring(0, 8)}`;
-
-    // 4. Secure QR Payload Creation
-    const qrPayload = JSON.stringify({
-      bookingRef,
-      bookingId,
-      userId: req.user._id,
-      locationId,
-      locationName: location.name,
-      slotId,
-      slotNumber: slot.slotNumber,
-      plateNumber: vehicle?.plateNumber || 'WALK-IN',
-      validFrom: startTime,
-      validUntil: endTime,
-      totalPaid: totalAmount,
-      securitySign: `SEC-${Buffer.from(bookingId + startTime).toString('base64').substring(0, 16)}`
-    });
-
-    // Generate QR base64 data URL
-    const qrDataUrl = await QRCode.toDataURL(qrPayload, {
-      errorCorrectionLevel: 'H',
-      margin: 2,
-      color: {
-        dark: '#0A1128',
-        light: '#FFFFFF'
+    try {
+      const location = findOne('locations', l => l._id === locationId);
+      if (!location) {
+        releaseLock(lockKey);
+        return res.status(404).json({ success: false, message: 'Location not found' });
       }
-    });
 
-    // 5. Store booking record
-    const newBooking = {
-      _id: bookingId,
-      bookingReference: bookingRef,
-      userId: req.user._id,
-      userName: req.user.name,
-      userEmail: req.user.email,
-      userPhone: req.user.phone || '',
-      locationId: location._id,
-      locationName: location.name,
-      locationAddress: location.address,
-      slotId: slot._id,
-      slotNumber: slot.slotNumber,
-      floor: slot.floor,
-      slotType: slot.type,
-      vehicle: vehicle || { plateNumber: 'KA-01-AB-1234', makeModel: 'Standard Car', type: 'Car' },
-      startTime,
-      endTime,
-      durationHours: duration,
-      ratePerHour,
-      subtotal,
-      taxes,
-      totalAmount,
-      paymentStatus: 'PAID',
-      paymentMethod: paymentMethod || 'UPI / Google Pay',
-      paymentReference: `UPI-${uuidv4().substring(0, 12).toUpperCase()}`,
-      bookingStatus: 'ACTIVE',
-      qrCodeData: qrPayload,
-      qrDataUrl,
-      entryTime: null,
-      exitTime: null,
-      createdAt: new Date().toISOString()
-    };
+      const slot = findOne('slots', s => s._id === slotId && s.locationId === locationId);
+      if (!slot) {
+        releaseLock(lockKey);
+        return res.status(404).json({ success: false, message: 'Parking slot not found' });
+      }
 
-    insertOne('bookings', newBooking);
+      if (slot.status === 'unavailable') {
+        releaseLock(lockKey);
+        return res.status(400).json({ success: false, message: 'This slot is currently under maintenance or unavailable' });
+      }
 
-    // 6. Record payment transaction
-    const paymentRecord = {
-      _id: `pay_${uuidv4().substring(0, 8)}`,
-      bookingId: newBooking._id,
-      bookingReference: bookingRef,
-      userId: req.user._id,
-      userName: req.user.name,
-      amount: totalAmount,
-      currency: 'INR',
-      method: paymentMethod || 'Google Pay / UPI',
-      upiId: upiId || `${req.user.name.toLowerCase().replace(/\s+/g, '')}@okaxis`,
-      status: 'SUCCESS',
-      transactionId: newBooking.paymentReference,
-      createdAt: new Date().toISOString()
-    };
-    insertOne('payments', paymentRecord);
+      // 2. Overlap & Concurrency Check (Anti Double-Booking Validation)
+      const reqStart = new Date(startTime).getTime();
+      const reqEnd = new Date(endTime).getTime();
 
-    // 7. Update slot status in real-time and broadcast to all connected clients
-    updateOne('slots', s => s._id === slotId, {
-      status: 'booked',
-      currentVehicle: vehicle?.plateNumber || 'BOOKED'
-    });
+      if (reqStart >= reqEnd) {
+        releaseLock(lockKey);
+        return res.status(400).json({ success: false, message: 'End time must be after start time' });
+      }
 
-    broadcastSlotUpdate({
-      locationId,
-      slotId,
-      slotNumber: slot.slotNumber,
-      status: 'booked',
-      updatedAt: new Date().toISOString()
-    });
+      const existingBookings = findMany('bookings', b =>
+        b.slotId === slotId &&
+        (b.bookingStatus === 'ACTIVE' || b.bookingStatus === 'CONFIRMED')
+      );
 
-    return res.status(201).json({
-      success: true,
-      message: 'Parking slot booked successfully! Your entry QR ticket is ready.',
-      data: newBooking
-    });
+      const hasConflict = existingBookings.some(b => {
+        const bStart = new Date(b.startTime).getTime();
+        const bEnd = new Date(b.endTime).getTime();
+        return (reqStart < bEnd && reqEnd > bStart);
+      });
+
+      if (hasConflict) {
+        releaseLock(lockKey);
+        return res.status(409).json({
+          success: false,
+          message: 'This slot has just been reserved by another user for the selected time window. Please choose another slot.'
+        });
+      }
+
+      // 3. Prevent duplicate active booking by same user on same slot & time
+      const duplicateUserBooking = findMany('bookings', b =>
+        b.userId === req.user._id &&
+        b.slotId === slotId &&
+        b.startTime === startTime &&
+        (b.bookingStatus === 'ACTIVE' || b.bookingStatus === 'CONFIRMED')
+      );
+
+      if (duplicateUserBooking.length > 0) {
+        releaseLock(lockKey);
+        return res.status(409).json({
+          success: false,
+          message: 'You already have an active booking for this slot at this exact time.'
+        });
+      }
+
+      // 4. Pricing Calculation based on exact duration and slot type
+      const duration = Math.max(1, parseFloat(durationHours) || Math.ceil((reqEnd - reqStart) / (1000 * 60 * 60)));
+      const ratePerHour = slot.hourlyRate || location.pricing.hourlyRate || 40;
+      const subtotal = Math.round(ratePerHour * duration);
+      const taxes = Math.round(subtotal * 0.18 * 100) / 100; // 18% GST
+      const totalAmount = Math.round(subtotal + taxes);
+
+      const bookingRef = generateBookingRef();
+      const bookingId = `bk_${uuidv4().substring(0, 8)}`;
+
+      // 5. Secure QR Payload Creation
+      const qrPayload = JSON.stringify({
+        bookingRef,
+        bookingId,
+        userId: req.user._id,
+        locationId,
+        locationName: location.name,
+        slotId,
+        slotNumber: slot.slotNumber,
+        plateNumber: vehicle?.plateNumber || 'WALK-IN',
+        validFrom: startTime,
+        validUntil: endTime,
+        totalPaid: totalAmount,
+        securitySign: `SEC-${Buffer.from(bookingId + startTime).toString('base64').substring(0, 16)}`
+      });
+
+      // Generate QR base64 data URL
+      const qrDataUrl = await QRCode.toDataURL(qrPayload, {
+        errorCorrectionLevel: 'H',
+        margin: 2,
+        color: {
+          dark: '#0A1128',
+          light: '#FFFFFF'
+        }
+      });
+
+      // 6. Store booking record
+      const newBooking = {
+        _id: bookingId,
+        bookingReference: bookingRef,
+        userId: req.user._id,
+        userName: req.user.name,
+        userEmail: req.user.email,
+        userPhone: req.user.phone || '',
+        locationId: location._id,
+        locationName: location.name,
+        locationAddress: location.address,
+        slotId: slot._id,
+        slotNumber: slot.slotNumber,
+        floor: slot.floor,
+        slotType: slot.type,
+        vehicle: vehicle || { plateNumber: 'KA-01-AB-1234', makeModel: 'Standard Car', type: 'Car' },
+        startTime,
+        endTime,
+        durationHours: duration,
+        ratePerHour,
+        subtotal,
+        taxes,
+        totalAmount,
+        paymentStatus: 'PAID',
+        paymentMethod: paymentMethod || 'UPI / Google Pay',
+        paymentReference: `UPI-${uuidv4().substring(0, 12).toUpperCase()}`,
+        bookingStatus: 'ACTIVE',
+        qrCodeData: qrPayload,
+        qrDataUrl,
+        entryTime: null,
+        exitTime: null,
+        createdAt: new Date().toISOString()
+      };
+
+      insertOne('bookings', newBooking);
+
+      // 7. Record payment transaction
+      const paymentRecord = {
+        _id: `pay_${uuidv4().substring(0, 8)}`,
+        bookingId: newBooking._id,
+        bookingReference: bookingRef,
+        userId: req.user._id,
+        userName: req.user.name,
+        amount: totalAmount,
+        currency: 'INR',
+        method: paymentMethod || 'Google Pay / UPI',
+        upiId: upiId || `${req.user.name.toLowerCase().replace(/\s+/g, '')}@okaxis`,
+        status: 'SUCCESS',
+        transactionId: newBooking.paymentReference,
+        createdAt: new Date().toISOString()
+      };
+      insertOne('payments', paymentRecord);
+
+      // 8. Update slot status in real-time and broadcast to all connected clients
+      updateOne('slots', s => s._id === slotId, {
+        status: 'booked',
+        currentVehicle: vehicle?.plateNumber || 'BOOKED'
+      });
+
+      broadcastSlotUpdate({
+        locationId,
+        slotId,
+        slotNumber: slot.slotNumber,
+        status: 'booked',
+        updatedAt: new Date().toISOString()
+      });
+
+      releaseLock(lockKey);
+
+      return res.status(201).json({
+        success: true,
+        message: 'Parking slot booked successfully! Your entry QR ticket is ready.',
+        data: newBooking
+      });
+    } catch (innerErr) {
+      releaseLock(lockKey);
+      throw innerErr;
+    }
   } catch (error) {
     console.error('Booking error:', error);
     return res.status(500).json({ success: false, message: 'Server error while processing booking' });

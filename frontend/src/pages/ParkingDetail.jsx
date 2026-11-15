@@ -118,19 +118,19 @@ export default function ParkingDetail() {
   const getSlotColor = (slot) => {
     const isSelected = selectedSlot?._id === slot._id;
     if (isSelected) {
-      return 'bg-emerald-500 text-[#0A1128] border-2 border-white ring-4 ring-emerald-500/30 scale-105 z-10';
+      return 'bg-gradient-to-tr from-[#00E676] to-emerald-400 text-[#040711] font-bold border-2 border-white ring-4 ring-emerald-500/40 scale-[1.03] z-10 shadow-emerald-glow';
     }
 
     switch (slot.status) {
       case 'available':
-        return 'bg-emerald-950/40 text-emerald-300 border-emerald-500/50 hover:border-emerald-400 hover:bg-emerald-900/50 cursor-pointer';
+        return 'glass-panel text-emerald-300 border-emerald-500/40 hover:border-emerald-400 hover:bg-emerald-950/40 cursor-pointer shadow-card-subtle';
       case 'booked':
-        return 'bg-rose-950/40 text-rose-400 border-rose-600/40 cursor-not-allowed opacity-80';
+        return 'bg-rose-950/20 text-rose-400 border-rose-500/30 cursor-not-allowed opacity-75';
       case 'reserved':
-        return 'bg-amber-950/40 text-amber-300 border-amber-500/40 cursor-not-allowed opacity-85';
+        return 'bg-amber-950/25 text-amber-300 border-amber-500/35 cursor-not-allowed opacity-80';
       case 'unavailable':
       default:
-        return 'bg-gray-800/60 text-gray-400 border-gray-700 cursor-not-allowed opacity-60';
+        return 'bg-white/[0.02] text-slate-500 border-white/5 cursor-not-allowed opacity-50';
     }
   };
 
@@ -187,37 +187,37 @@ export default function ParkingDetail() {
 
   if (!location) {
     return (
-      <div className="min-h-screen bg-[#0A1128] text-white flex items-center justify-center">
-        <div className="w-8 h-8 border-4 border-emerald-500 border-t-transparent rounded-full animate-spin"></div>
+      <div className="min-h-screen text-white flex items-center justify-center">
+        <div className="w-10 h-10 border-4 border-emerald-500 border-t-transparent rounded-full animate-spin"></div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-[#0A1128] text-white pb-24">
-      {/* Location Top Bar Header */}
-      <div className="bg-[#0C152E] border-b border-gray-800 py-6">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="relative text-white pb-24">
+      {/* Location Top Bar Header with Glassmorphism */}
+      <div className="relative border-b border-white/[0.08] py-8 overflow-hidden">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
             <div>
               <button
                 onClick={() => navigate('/dashboard')}
-                className="inline-flex items-center text-xs font-semibold text-gray-400 hover:text-emerald-400 mb-2 transition-colors"
+                className="inline-flex items-center text-xs font-bold text-slate-400 hover:text-emerald-400 mb-2 transition-colors"
               >
                 <ArrowLeft className="w-3.5 h-3.5 mr-1" /> Back to all hubs
               </button>
               <h1 className="text-2xl sm:text-3xl font-black text-white">{location.name}</h1>
-              <p className="text-xs text-gray-400 mt-1 flex items-center gap-1.5">
+              <p className="text-xs text-slate-400 mt-1 flex items-center gap-1.5">
                 <MapPin className="w-3.5 h-3.5 text-emerald-400" /> {location.address}
               </p>
             </div>
 
             {/* Quick stats pill */}
             <div className="flex items-center gap-2">
-              <span className="px-3 py-1.5 rounded-xl bg-gray-800 text-xs font-semibold text-gray-300 border border-gray-700">
-                Operating: <span className="text-white">{location.operatingHours}</span>
+              <span className="px-3.5 py-1.5 rounded-xl glass-panel-subtle text-xs font-semibold text-slate-300 border border-white/10">
+                Hours: <span className="text-white font-bold">{location.operatingHours}</span>
               </span>
-              <span className="px-3 py-1.5 rounded-xl bg-emerald-500/10 text-xs font-semibold text-emerald-400 border border-emerald-500/30">
+              <span className="px-3.5 py-1.5 rounded-xl bg-emerald-500/10 text-xs font-bold text-emerald-400 border border-emerald-500/30 shadow-emerald-glow">
                 ★ {location.rating} ({location.reviewCount} verified reviews)
               </span>
             </div>
@@ -232,7 +232,7 @@ export default function ParkingDetail() {
           <div className="lg:col-span-8 space-y-6">
             
             {/* Floor Tabs & Color Legend */}
-            <div className="bg-[#0D1630] p-4 rounded-2xl border border-gray-800 shadow-xl flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div className="glass-panel p-4 rounded-2xl border border-white/10 shadow-xl flex flex-col sm:flex-row sm:items-center justify-between gap-4">
               
               {/* Floor Switcher */}
               <div className="flex items-center gap-1.5 overflow-x-auto pb-1 sm:pb-0">
@@ -243,10 +243,10 @@ export default function ParkingDetail() {
                       setActiveFloor(fl);
                       setSelectedSlot(null);
                     }}
-                    className={`px-3.5 py-2 rounded-xl text-xs font-bold transition-all whitespace-nowrap ${
+                    className={`px-4 py-2 rounded-xl text-xs font-bold transition-all whitespace-nowrap ${
                       activeFloor === fl
-                        ? 'bg-[#00C853] text-[#0A1128] shadow-md shadow-emerald-500/20'
-                        : 'bg-gray-800/80 text-gray-400 hover:text-white'
+                        ? 'btn-emerald text-[#040711]'
+                        : 'glass-panel-subtle text-slate-400 hover:text-white border border-white/5'
                     }`}
                   >
                     {fl}
@@ -255,34 +255,34 @@ export default function ParkingDetail() {
               </div>
 
               {/* Status Color Legend */}
-              <div className="flex items-center gap-3 text-[11px] font-medium text-gray-300 flex-wrap">
+              <div className="flex items-center gap-3.5 text-[11px] font-semibold text-slate-300 flex-wrap">
                 <span className="flex items-center gap-1.5">
-                  <span className="w-2.5 h-2.5 rounded-full bg-[#00C853]"></span> Available
+                  <span className="w-2.5 h-2.5 rounded-full bg-[#00E676] shadow-[0_0_8px_#00E676]"></span> Available
                 </span>
                 <span className="flex items-center gap-1.5">
-                  <span className="w-2.5 h-2.5 rounded-full bg-rose-500"></span> Booked
+                  <span className="w-2.5 h-2.5 rounded-full bg-rose-500 shadow-[0_0_8px_#f43f5e]"></span> Booked
                 </span>
                 <span className="flex items-center gap-1.5">
-                  <span className="w-2.5 h-2.5 rounded-full bg-amber-400"></span> Reserved
+                  <span className="w-2.5 h-2.5 rounded-full bg-amber-400 shadow-[0_0_8px_#fbbf24]"></span> Reserved
                 </span>
                 <span className="flex items-center gap-1.5">
-                  <span className="w-2.5 h-2.5 rounded-full bg-gray-600"></span> Maintenance
+                  <span className="w-2.5 h-2.5 rounded-full bg-slate-600"></span> Maintenance
                 </span>
               </div>
             </div>
 
             {/* Interactive Parking Map Bay Canvas */}
-            <div className="bg-[#0B132B] p-6 sm:p-8 rounded-2xl border border-gray-800 shadow-2xl relative overflow-hidden">
+            <div className="glass-panel p-6 sm:p-8 rounded-3xl border border-white/10 shadow-2xl relative overflow-hidden bg-parking-stripes">
               
               {/* Driveway Lane Marking */}
-              <div className="flex items-center justify-between mb-4 px-2 text-xs text-gray-400 border-b border-gray-800/80 pb-2">
-                <span className="flex items-center gap-1 text-emerald-400 font-mono">
+              <div className="flex items-center justify-between mb-5 px-3 text-xs text-slate-400 border-b border-white/[0.08] pb-3">
+                <span className="flex items-center gap-1.5 text-emerald-400 font-mono font-bold">
                   ▲ VEHICLE ENTRY GATE
                 </span>
-                <span className="text-[11px] uppercase tracking-widest font-mono text-gray-500">
+                <span className="text-[11px] uppercase tracking-widest font-mono text-slate-500">
                   Driveway Center Lane (One-Way)
                 </span>
-                <span className="flex items-center gap-1 text-rose-400 font-mono">
+                <span className="flex items-center gap-1.5 text-rose-400 font-mono font-bold">
                   EXIT GATE ▼
                 </span>
               </div>
@@ -298,7 +298,7 @@ export default function ParkingDetail() {
                       key={slot._id}
                       disabled={!isAvailable}
                       onClick={() => setSelectedSlot(slot)}
-                      className={`relative p-3.5 sm:p-4 rounded-xl border flex flex-col justify-between transition-all duration-200 text-left h-24 sm:h-28 ${getSlotColor(slot)}`}
+                      className={`relative p-3.5 sm:p-4 rounded-2xl border flex flex-col justify-between transition-all duration-200 text-left h-24 sm:h-28 ${getSlotColor(slot)}`}
                     >
                       {/* Top row: Slot number & Type badge */}
                       <div className="flex items-center justify-between w-full">
@@ -308,7 +308,7 @@ export default function ParkingDetail() {
                         
                         {slot.type === 'EV' && (
                           <span className={`text-[10px] font-black px-1.5 py-0.5 rounded flex items-center gap-0.5 ${
-                            isSelected ? 'bg-[#0A1128] text-emerald-400' : 'bg-emerald-500/20 text-emerald-300'
+                            isSelected ? 'bg-[#040711] text-emerald-400' : 'bg-emerald-500/20 text-emerald-300'
                           }`}>
                             <Zap className="w-3 h-3 fill-current" /> EV
                           </span>
@@ -330,22 +330,22 @@ export default function ParkingDetail() {
                       {/* Middle: Vehicle or Status */}
                       <div className="text-[11px] font-medium truncate">
                         {slot.status === 'booked' ? (
-                          <span className="font-mono text-[10px] text-rose-400">
+                          <span className="font-mono text-[10px] text-rose-400 font-bold">
                             {slot.currentVehicle || 'OCCUPIED'}
                           </span>
                         ) : slot.status === 'reserved' ? (
-                          <span className="text-[10px] text-amber-400">HOLD</span>
+                          <span className="text-[10px] text-amber-400 font-bold">HOLD</span>
                         ) : slot.status === 'unavailable' ? (
-                          <span className="text-[10px] text-gray-500">CLOSED</span>
+                          <span className="text-[10px] text-slate-500 font-bold">CLOSED</span>
                         ) : (
-                          <span className={isSelected ? 'text-[#0A1128] font-bold' : 'text-emerald-400'}>
+                          <span className={isSelected ? 'text-[#040711] font-bold' : 'text-emerald-400 font-bold'}>
                             Available
                           </span>
                         )}
                       </div>
 
                       {/* Bottom rate */}
-                      <div className="flex items-center justify-between text-[11px] pt-1 border-t border-current/20">
+                      <div className="flex items-center justify-between text-[11px] pt-1.5 border-t border-current/15 font-semibold">
                         <span>₹{slot.hourlyRate}/h</span>
                         {isSelected && <CheckCircle2 className="w-4 h-4 fill-current" />}
                       </div>
@@ -355,13 +355,13 @@ export default function ParkingDetail() {
               </div>
 
               {/* Driveway Bottom Lane */}
-              <div className="text-center py-2 bg-gray-900/60 rounded-xl border border-dashed border-gray-700/60 text-xs font-mono text-gray-400">
+              <div className="text-center py-2.5 bg-[#040711]/60 rounded-xl border border-dashed border-white/10 text-xs font-mono text-slate-400">
                 ===== REVERSE / DRIVE-IN LANE =====
               </div>
             </div>
 
             {/* Location Amenities & Specs */}
-            <div className="bg-[#0D1630] p-6 rounded-2xl border border-gray-800 shadow-xl">
+            <div className="glass-panel p-6 rounded-3xl border border-white/10 shadow-xl">
               <h3 className="text-sm font-bold text-white uppercase tracking-wider mb-4 flex items-center gap-2">
                 <ShieldCheck className="w-4 h-4 text-emerald-400" />
                 <span>Facility Infrastructure & Services</span>
@@ -369,9 +369,9 @@ export default function ParkingDetail() {
 
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
                 {location.amenities?.map((amenity, idx) => (
-                  <div key={idx} className="p-3 bg-gray-900/70 rounded-xl border border-gray-800/80 flex items-center gap-2.5">
+                  <div key={idx} className="p-3 bg-[#040711]/50 rounded-xl border border-white/5 flex items-center gap-2.5">
                     <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
-                    <span className="text-xs text-gray-200">{amenity}</span>
+                    <span className="text-xs text-slate-200 font-medium">{amenity}</span>
                   </div>
                 ))}
               </div>
@@ -381,19 +381,19 @@ export default function ParkingDetail() {
 
           {/* Right Sidebar: Booking Calculator & Reservation Drawer (4 Cols) */}
           <div className="lg:col-span-4">
-            <div className="sticky top-24 bg-[#0D1630] border border-gray-800 rounded-2xl p-6 shadow-2xl">
+            <div className="sticky top-24 glass-panel border border-white/10 rounded-3xl p-6 shadow-2xl">
               
-              <div className="flex items-center justify-between pb-4 border-b border-gray-800">
+              <div className="flex items-center justify-between pb-4 border-b border-white/[0.08]">
                 <h3 className="text-base font-bold text-white flex items-center gap-2">
                   <SquareParking className="w-5 h-5 text-emerald-400" />
                   <span>Bay Reservation</span>
                 </h3>
                 {selectedSlot ? (
-                  <span className="px-2.5 py-1 rounded-full text-xs font-mono font-bold bg-[#00C853] text-[#0A1128]">
+                  <span className="px-3 py-1 rounded-full text-xs font-mono font-bold btn-emerald text-[#040711]">
                     Bay {selectedSlot.slotNumber}
                   </span>
                 ) : (
-                  <span className="text-xs text-amber-400 bg-amber-500/10 px-2 py-0.5 rounded">
+                  <span className="text-xs text-amber-300 bg-amber-500/10 px-2.5 py-1 rounded-full border border-amber-500/20 font-medium">
                     Select a Slot
                   </span>
                 )}
@@ -402,17 +402,17 @@ export default function ParkingDetail() {
               {selectedSlot ? (
                 <div className="space-y-5 mt-5">
                   {/* Selected Bay Specs */}
-                  <div className="p-3.5 bg-gray-900 rounded-xl border border-gray-800">
+                  <div className="p-4 bg-[#040711]/70 rounded-2xl border border-white/10 space-y-2">
                     <div className="flex justify-between items-center text-xs">
-                      <span className="text-gray-400">Selected Bay:</span>
+                      <span className="text-slate-400">Selected Bay:</span>
                       <span className="font-bold text-white">{selectedSlot.slotNumber} ({selectedSlot.type})</span>
                     </div>
-                    <div className="flex justify-between items-center text-xs mt-1.5">
-                      <span className="text-gray-400">Floor:</span>
-                      <span className="text-gray-200">{activeFloor}</span>
+                    <div className="flex justify-between items-center text-xs">
+                      <span className="text-slate-400">Floor:</span>
+                      <span className="text-slate-200 font-medium">{activeFloor}</span>
                     </div>
-                    <div className="flex justify-between items-center text-xs mt-1.5">
-                      <span className="text-gray-400">Base Hourly Rate:</span>
+                    <div className="flex justify-between items-center text-xs">
+                      <span className="text-slate-400">Base Hourly Rate:</span>
                       <span className="text-emerald-400 font-bold">₹{ratePerHour} / hour</span>
                     </div>
                   </div>
@@ -420,21 +420,21 @@ export default function ParkingDetail() {
                   {/* Date & Start Time */}
                   <div className="grid grid-cols-2 gap-2">
                     <div>
-                      <label className="block text-[11px] text-gray-400 font-semibold mb-1">Booking Date</label>
+                      <label className="block text-[11px] text-slate-400 font-semibold mb-1">Booking Date</label>
                       <input
                         type="date"
                         value={bookingDate}
                         onChange={(e) => setBookingDate(e.target.value)}
-                        className="w-full bg-gray-900 border border-gray-700 rounded-xl px-2.5 py-2 text-xs text-white focus:outline-none focus:border-emerald-500"
+                        className="w-full bg-[#040711]/80 border border-white/10 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-emerald-500"
                       />
                     </div>
                     <div>
-                      <label className="block text-[11px] text-gray-400 font-semibold mb-1">Entry Time</label>
+                      <label className="block text-[11px] text-slate-400 font-semibold mb-1">Entry Time</label>
                       <input
                         type="time"
                         value={bookingTime}
                         onChange={(e) => setBookingTime(e.target.value)}
-                        className="w-full bg-gray-900 border border-gray-700 rounded-xl px-2.5 py-2 text-xs text-white focus:outline-none focus:border-emerald-500"
+                        className="w-full bg-[#040711]/80 border border-white/10 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-emerald-500"
                       />
                     </div>
                   </div>
@@ -442,19 +442,19 @@ export default function ParkingDetail() {
                   {/* Duration Selector */}
                   <div>
                     <div className="flex justify-between text-xs font-semibold mb-2">
-                      <span className="text-gray-300">Duration</span>
+                      <span className="text-slate-300">Duration</span>
                       <span className="text-emerald-400 font-bold">{durationHours} Hours</span>
                     </div>
 
-                    <div className="grid grid-cols-4 gap-1.5 mb-2">
+                    <div className="grid grid-cols-4 gap-1.5 mb-2.5">
                       {[1, 2, 4, 8].map((hrs) => (
                         <button
                           key={hrs}
                           onClick={() => setDurationHours(hrs)}
-                          className={`py-1.5 text-xs font-bold rounded-lg border transition-all ${
+                          className={`py-2 text-xs font-bold rounded-xl border transition-all ${
                             durationHours === hrs
-                              ? 'bg-[#00C853] text-[#0A1128] border-[#00C853]'
-                              : 'bg-gray-900 text-gray-300 border-gray-700 hover:border-gray-600'
+                              ? 'btn-emerald text-[#040711]'
+                              : 'glass-panel-subtle text-slate-300 border-white/10 hover:border-white/20'
                           }`}
                         >
                           {hrs} hr{hrs > 1 ? 's' : ''}
@@ -468,20 +468,20 @@ export default function ParkingDetail() {
                       max="24"
                       value={durationHours}
                       onChange={(e) => setDurationHours(parseInt(e.target.value))}
-                      className="w-full accent-[#00C853]"
+                      className="w-full accent-[#00E676]"
                     />
                   </div>
 
                   {/* Vehicle selection */}
                   <div>
-                    <label className="block text-[11px] text-gray-400 font-semibold mb-1">Vehicle Details</label>
+                    <label className="block text-[11px] text-slate-400 font-semibold mb-1">Vehicle Details</label>
                     {user?.vehicles?.length > 0 ? (
                       <select
                         onChange={(e) => {
                           const veh = user.vehicles.find(v => v.id === e.target.value);
                           setSelectedVehicle(veh);
                         }}
-                        className="w-full bg-gray-900 border border-gray-700 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-emerald-500"
+                        className="w-full bg-[#040711]/80 border border-white/10 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-emerald-500"
                       >
                         {user.vehicles.map(v => (
                           <option key={v.id} value={v.id}>
@@ -495,48 +495,48 @@ export default function ParkingDetail() {
                         placeholder="Enter Number Plate (e.g. DL-01-AB-1234)"
                         value={customPlate}
                         onChange={(e) => setCustomPlate(e.target.value)}
-                        className="w-full bg-gray-900 border border-gray-700 rounded-xl px-3 py-2 text-xs text-white uppercase focus:outline-none focus:border-emerald-500"
+                        className="w-full bg-[#040711]/80 border border-white/10 rounded-xl px-3 py-2 text-xs text-white uppercase focus:outline-none focus:border-emerald-500"
                       />
                     )}
                   </div>
 
                   {/* Price breakdown */}
-                  <div className="pt-4 border-t border-gray-800 space-y-1.5 text-xs">
-                    <div className="flex justify-between text-gray-400">
+                  <div className="pt-4 border-t border-white/[0.08] space-y-1.5 text-xs">
+                    <div className="flex justify-between text-slate-400">
                       <span>Rate (₹{ratePerHour} × {durationHours} hrs)</span>
-                      <span className="text-white">₹{subtotal}</span>
+                      <span className="text-white font-medium">₹{subtotal}</span>
                     </div>
-                    <div className="flex justify-between text-gray-400">
+                    <div className="flex justify-between text-slate-400">
                       <span>GST (18%)</span>
-                      <span className="text-white">₹{taxes}</span>
+                      <span className="text-white font-medium">₹{taxes}</span>
                     </div>
-                    <div className="flex justify-between text-sm font-black text-white pt-2 border-t border-gray-800">
+                    <div className="flex justify-between text-sm font-black text-white pt-2 border-t border-white/[0.08]">
                       <span>Total Payable</span>
-                      <span className="text-emerald-400 text-lg">₹{totalAmount}</span>
+                      <span className="text-emerald-400 text-lg font-mono">₹{totalAmount}</span>
                     </div>
                   </div>
 
                   {/* Proceed to checkout CTA */}
                   <button
                     onClick={handleProceedToBooking}
-                    className="w-full py-3.5 rounded-xl bg-[#00C853] hover:bg-[#00b54b] text-[#0A1128] font-black text-sm shadow-xl shadow-emerald-500/25 transition-all hover:scale-[1.02] flex items-center justify-center gap-2"
+                    className="w-full py-3.5 rounded-xl btn-emerald text-sm font-black flex items-center justify-center gap-2"
                   >
                     <span>Confirm & Pay ₹{totalAmount}</span>
                     <ArrowRight className="w-4 h-4 stroke-[2.5]" />
                   </button>
 
-                  <p className="text-[10px] text-gray-400 text-center">
+                  <p className="text-[10px] text-slate-400 text-center">
                     Instant cancellation allowed up to 15 mins before entry window.
                   </p>
                 </div>
               ) : (
-                <div className="text-center py-12">
-                  <div className="w-12 h-12 rounded-full bg-gray-800/80 text-emerald-400 flex items-center justify-center mx-auto mb-3">
-                    <SquareParking className="w-6 h-6" />
+                <div className="text-center py-14">
+                  <div className="w-14 h-14 rounded-2xl glass-panel-subtle text-emerald-400 flex items-center justify-center mx-auto mb-3.5 border border-white/10">
+                    <SquareParking className="w-7 h-7" />
                   </div>
                   <h4 className="text-sm font-bold text-white">Click any Green Bay on the map</h4>
-                  <p className="text-xs text-gray-400 mt-1 max-w-xs mx-auto">
-                    Select your preferred parking slot on the floor layout to view pricing and lock your reservation.
+                  <p className="text-xs text-slate-400 mt-1.5 max-w-xs mx-auto leading-relaxed">
+                    Select your preferred parking bay on the floor plan to view pricing, customize duration, and lock your spot.
                   </p>
                 </div>
               )}

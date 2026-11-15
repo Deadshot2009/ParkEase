@@ -120,9 +120,14 @@ router.post('/vehicles', protect, (req, res) => {
   }
 
   const vehicles = req.user.vehicles || [];
+  const normalizedPlate = plateNumber.toUpperCase().trim();
+  if (vehicles.some(v => v.plateNumber === normalizedPlate)) {
+    return res.status(409).json({ success: false, message: 'This vehicle plate number is already registered to your account' });
+  }
+
   const newVehicle = {
     id: `veh_${uuidv4().substring(0, 6)}`,
-    plateNumber: plateNumber.toUpperCase().trim(),
+    plateNumber: normalizedPlate,
     makeModel,
     type: type || 'Car',
     color: color || 'Silver'
