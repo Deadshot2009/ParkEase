@@ -23,6 +23,11 @@ export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [userDropdownOpen, setUserDropdownOpen] = useState(false);
 
+  const isAdminApp = 
+    import.meta.env.VITE_APP_MODE === 'admin' || 
+    window.location.port === '3001' || 
+    window.location.hostname.includes('admin');
+
   const isActive = (path) => location.pathname === path;
 
   return (
@@ -43,36 +48,40 @@ export default function Navbar() {
                 Park<span className="text-cyan-400 drop-shadow-[0_0_12px_rgba(6,182,212,0.4)]">Ease</span>
               </span>
               <span className="text-[10px] text-slate-400 font-semibold tracking-widest uppercase -mt-1 hidden sm:block">
-                Smart Mobility
+                {isAdminApp ? 'Admin Console' : 'Smart Mobility'}
               </span>
             </div>
           </Link>
 
           {/* Desktop Nav Links */}
           <nav className="hidden md:flex items-center space-x-1.5 lg:space-x-2">
-            <Link
-              to="/dashboard"
-              className={`px-3.5 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-2 ${
-                isActive('/dashboard')
-                  ? 'bg-indigo-500/20 text-cyan-300 border border-indigo-500/40 shadow-indigo-glow'
-                  : 'text-slate-300 hover:text-white hover:bg-white/[0.06] border border-transparent'
-              }`}
-            >
-              <Compass className="w-4 h-4 text-cyan-400" />
-              Find Parking
-            </Link>
+            {!isAdminApp && (
+              <>
+                <Link
+                  to="/dashboard"
+                  className={`px-3.5 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-2 ${
+                    isActive('/dashboard')
+                      ? 'bg-indigo-500/20 text-cyan-300 border border-indigo-500/40 shadow-indigo-glow'
+                      : 'text-slate-300 hover:text-white hover:bg-white/[0.06] border border-transparent'
+                  }`}
+                >
+                  <Compass className="w-4 h-4 text-cyan-400" />
+                  Find Parking
+                </Link>
 
-            <Link
-              to="/history"
-              className={`px-3.5 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-2 ${
-                isActive('/history')
-                  ? 'bg-indigo-500/20 text-cyan-300 border border-indigo-500/40 shadow-indigo-glow'
-                  : 'text-slate-300 hover:text-white hover:bg-white/[0.06] border border-transparent'
-              }`}
-            >
-              <History className="w-4 h-4 text-cyan-400" />
-              My Bookings
-            </Link>
+                <Link
+                  to="/history"
+                  className={`px-3.5 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-2 ${
+                    isActive('/history')
+                      ? 'bg-indigo-500/20 text-cyan-300 border border-indigo-500/40 shadow-indigo-glow'
+                      : 'text-slate-300 hover:text-white hover:bg-white/[0.06] border border-transparent'
+                  }`}
+                >
+                  <History className="w-4 h-4 text-cyan-400" />
+                  My Bookings
+                </Link>
+              </>
+            )}
 
             <Link
               to="/gate-scanner"
@@ -86,7 +95,7 @@ export default function Navbar() {
               Gate Barrier Scan
             </Link>
 
-            {isAdmin && (
+            {isAdminApp && (
               <Link
                 to="/admin"
                 className={`px-3.5 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-2 ${
@@ -96,7 +105,7 @@ export default function Navbar() {
                 }`}
               >
                 <ShieldCheck className="w-4 h-4 text-amber-400" />
-                Admin Console
+                Admin Dashboard
               </Link>
             )}
           </nav>
@@ -211,22 +220,26 @@ export default function Navbar() {
       {/* Mobile Drawer */}
       {mobileMenuOpen && (
         <div className="md:hidden glass-panel border-b border-white/10 px-4 pt-3 pb-6 space-y-2">
-          <Link
-            to="/dashboard"
-            onClick={() => setMobileMenuOpen(false)}
-            className="flex items-center px-3.5 py-2.5 rounded-xl text-xs font-bold text-slate-200 hover:bg-white/[0.06]"
-          >
-            <Compass className="w-4 h-4 mr-3 text-cyan-400" />
-            Find Parking
-          </Link>
-          <Link
-            to="/history"
-            onClick={() => setMobileMenuOpen(false)}
-            className="flex items-center px-3.5 py-2.5 rounded-xl text-xs font-bold text-slate-200 hover:bg-white/[0.06]"
-          >
-            <History className="w-4 h-4 mr-3 text-cyan-400" />
-            My Bookings
-          </Link>
+          {!isAdminApp && (
+            <>
+              <Link
+                to="/dashboard"
+                onClick={() => setMobileMenuOpen(false)}
+                className="flex items-center px-3.5 py-2.5 rounded-xl text-xs font-bold text-slate-200 hover:bg-white/[0.06]"
+              >
+                <Compass className="w-4 h-4 mr-3 text-cyan-400" />
+                Find Parking
+              </Link>
+              <Link
+                to="/history"
+                onClick={() => setMobileMenuOpen(false)}
+                className="flex items-center px-3.5 py-2.5 rounded-xl text-xs font-bold text-slate-200 hover:bg-white/[0.06]"
+              >
+                <History className="w-4 h-4 mr-3 text-cyan-400" />
+                My Bookings
+              </Link>
+            </>
+          )}
           <Link
             to="/gate-scanner"
             onClick={() => setMobileMenuOpen(false)}
@@ -235,7 +248,7 @@ export default function Navbar() {
             <QrCode className="w-4 h-4 mr-3 text-cyan-400" />
             Gate Barrier Scanner
           </Link>
-          {isAdmin && (
+          {isAdminApp && (
             <Link
               to="/admin"
               onClick={() => setMobileMenuOpen(false)}

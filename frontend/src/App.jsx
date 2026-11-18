@@ -53,11 +53,15 @@ const AdminRoute = ({ children }) => {
   return children;
 };
 
-// Automatic port-aware routing: When visited on port 3001, route directly to Admin portal
+// Automatic mode & port aware routing: When in Admin mode or port 3001, route directly to Admin portal
 const AdminPortRedirect = ({ children }) => {
   const location = useLocation();
-  const isAdminPort = window.location.port === '3001';
-  if (isAdminPort && location.pathname === '/') {
+  const isAdminApp = 
+    import.meta.env.VITE_APP_MODE === 'admin' || 
+    window.location.port === '3001' || 
+    window.location.hostname.includes('admin');
+
+  if (isAdminApp && location.pathname === '/') {
     return <Navigate to="/admin" replace />;
   }
   return children;

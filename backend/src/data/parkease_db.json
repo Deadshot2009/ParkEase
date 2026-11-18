@@ -155,6 +155,18 @@
       "createdAt": "2026-11-15T11:20:01.987Z",
       "updatedAt": "2026-11-18T06:29:25.325Z",
       "mustChangePassword": false
+    },
+    {
+      "_id": "usr_da86f03a",
+      "name": "Dharunraj M",
+      "email": "you@gmail.com",
+      "passwordHash": "$2a$10$depSrnpZ60aPOfYihb6e4ufzsHyuDRusX9CA.XnGcftSlb.quv59O",
+      "phone": "9344343194",
+      "role": "user",
+      "avatar": "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=200&q=80",
+      "vehicles": [],
+      "favorites": [],
+      "createdAt": "2026-11-18T06:41:44.270Z"
     }
   ],
   "locations": [
