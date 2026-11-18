@@ -1,6 +1,7 @@
 import express from 'express';
 import http from 'http';
 import cors from 'cors';
+import cookieParser from 'cookie-parser';
 import dotenv from 'dotenv';
 import { Server as SocketIOServer } from 'socket.io';
 import { connectDB } from './config/db.js';
@@ -29,8 +30,28 @@ const io = new SocketIOServer(server, {
 
 initSocket(io);
 
-// Middleware
-app.use(cors());
+// Middleware - CORS with credential (cookie) support
+const allowedOrigins = [
+  'http://localhost:3000',
+  'http://127.0.0.1:3000',
+  'http://localhost:5000',
+  process.env.FRONTEND_URL
+].filter(Boolean);
+
+app.use(cors({
+  origin: (origin, callback) => {
+    // allow requests with no origin (like mobile apps or curl) or matching origins
+    if (!origin || allowedOrigins.includes(origin) || origin.startsWith('http://localhost:') || origin.startsWith('http://127.0.0.1:')) {
+      return callback(null, true);
+    }
+    return callback(null, true);
+  },
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept']
+}));
+
+app.use(cookieParser());
 app.use(express.json());
 
 // Request logging middleware
@@ -97,13 +118,16 @@ const PORT = process.env.PORT || 5000;
   await connectDB();
   initDataStore();
 
-  server.listen(PORT, () => {
-    console.log(`\n=================================================`);
-    console.log(`🚗 ParkEase Smart Parking API Server is Live!`);
-    console.log(`📡 URL: http://localhost:${PORT}`);
-    console.log(`⚡ WebSocket / Socket.IO ready`);
-    console.log(`=================================================\n`);
-  });
+  if (!process.env.VERCEL) {
+    server.listen(PORT, () => {
+      console.log(`\n=================================================`);
+      console.log(`🚗 ParkEase Smart Parking API Server is Live!`);
+      console.log(`📡 URL: http://localhost:${PORT}`);
+      console.log(`⚡ WebSocket / Socket.IO ready`);
+      console.log(`=================================================\n`);
+    });
+  }
 })();
 
 export { app, server };
+export default app;

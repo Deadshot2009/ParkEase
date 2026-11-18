@@ -16,7 +16,8 @@ import {
   Clock, 
   Layers,
   Sparkles,
-  Trash2
+  Trash2,
+  ChevronRight
 } from 'lucide-react';
 import api from '../services/api';
 import { useAuth } from '../context/AuthContext';
@@ -104,17 +105,18 @@ export default function Dashboard() {
     <div className="relative text-white pb-24">
       {/* Top Banner with subtle architectural depth */}
       <div className="relative border-b border-white/[0.08] py-8 lg:py-12 overflow-hidden">
-        <div className="absolute top-0 right-1/4 w-96 h-96 bg-emerald-500/10 rounded-full blur-[120px] pointer-events-none" />
+        <div className="absolute top-0 right-1/4 w-96 h-96 bg-indigo-500/15 rounded-full blur-[140px] pointer-events-none" />
+        <div className="absolute top-0 left-10 w-80 h-80 bg-cyan-500/10 rounded-full blur-[120px] pointer-events-none" />
         
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
             <div>
               <div className="flex items-center gap-2 mb-2">
-                <span className="text-xs font-bold px-3 py-0.5 rounded-full bg-emerald-500/15 text-emerald-400 border border-emerald-500/30">
+                <span className="text-xs font-bold px-3 py-0.5 rounded-full bg-indigo-500/15 text-cyan-400 border border-indigo-500/30">
                   Live Reservation Engine
                 </span>
                 <span className="text-xs text-slate-400 flex items-center gap-1.5 ml-2">
-                  <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> Network Online
+                  <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span> Network Synchronized
                 </span>
               </div>
               <h1 className="text-2xl sm:text-3xl font-black text-white">
@@ -129,15 +131,15 @@ export default function Dashboard() {
             <div className="flex items-center gap-3">
               <button
                 onClick={() => setShowVehicleModal(true)}
-                className="px-4 py-2.5 rounded-xl glass-panel-subtle hover:bg-white/[0.08] text-xs font-bold text-white border border-white/10 flex items-center gap-2 transition-all hover:border-emerald-500/40"
+                className="px-4 py-2.5 rounded-xl glass-panel-subtle hover:bg-white/[0.08] text-xs font-bold text-white border border-white/10 flex items-center gap-2 transition-all hover:border-indigo-500/40"
               >
-                <Car className="w-4 h-4 text-emerald-400" />
+                <Car className="w-4 h-4 text-cyan-400" />
                 <span>My Vehicles ({user?.vehicles?.length || 0})</span>
               </button>
 
               <Link
                 to="/history"
-                className="px-4 py-2.5 rounded-xl btn-emerald text-xs font-bold flex items-center gap-2 transition-all"
+                className="px-4 py-2.5 rounded-xl btn-primary text-xs font-bold flex items-center gap-2 transition-all"
               >
                 <QrCode className="w-4 h-4 stroke-[2.5]" />
                 <span>Active Passes ({activeBookings.length})</span>
@@ -151,15 +153,15 @@ export default function Dashboard() {
         
         {/* Active Booking Quick Card (if user has active pass) */}
         {activeBookings.length > 0 && (
-          <div className="mb-8 p-5 sm:p-6 rounded-2xl glass-panel border border-emerald-500/30 shadow-emerald-glow flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+          <div className="mb-8 p-5 sm:p-6 rounded-2xl glass-panel border border-indigo-500/40 shadow-indigo-glow flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
             <div className="flex items-center gap-4">
-              <div className="w-12 h-12 rounded-xl bg-gradient-to-tr from-[#00E676] to-emerald-500 text-[#040711] flex items-center justify-center font-black text-lg shrink-0 shadow-lg shadow-emerald-500/20">
+              <div className="w-12 h-12 rounded-xl bg-gradient-to-tr from-indigo-600 to-cyan-400 text-white flex items-center justify-center font-black text-lg shrink-0 shadow-lg shadow-indigo-500/30">
                 <QrCode className="w-6 h-6 stroke-[2.5]" />
               </div>
               <div>
                 <div className="flex items-center gap-2">
-                  <span className="text-xs font-bold text-emerald-400 uppercase tracking-wider">Active Pass Ready</span>
-                  <span className="text-[10px] bg-emerald-500/20 text-emerald-300 px-2 py-0.5 rounded-full font-mono font-bold">
+                  <span className="text-xs font-bold text-cyan-400 uppercase tracking-wider">Active Pass Ready</span>
+                  <span className="text-[10px] bg-indigo-500/25 text-indigo-300 px-2 py-0.5 rounded-full font-mono font-bold">
                     {activeBookings[0].bookingReference}
                   </span>
                 </div>
@@ -175,7 +177,7 @@ export default function Dashboard() {
             <div className="flex items-center gap-3 w-full sm:w-auto">
               <Link
                 to={`/ticket/${activeBookings[0]._id}`}
-                className="flex-1 sm:flex-none text-center px-5 py-2.5 rounded-xl btn-emerald text-xs font-bold transition-all shadow-md"
+                className="flex-1 sm:flex-none text-center px-5 py-2.5 rounded-xl btn-cyan text-xs font-bold transition-all shadow-md"
               >
                 Show QR at Gate
               </Link>
@@ -187,8 +189,8 @@ export default function Dashboard() {
         <div className="glass-panel p-4 rounded-2xl shadow-lg mb-8 border border-white/10">
           <div className="flex flex-col md:flex-row gap-4 items-center justify-between">
             {/* Input */}
-            <div className="w-full md:w-96 flex items-center px-4 py-2.5 bg-[#040711]/70 rounded-xl border border-white/10 focus-within:border-emerald-500/60 transition-colors">
-              <Search className="w-4 h-4 text-emerald-400 mr-3 shrink-0" />
+            <div className="w-full md:w-96 flex items-center px-4 py-2.5 bg-[#0B0F19]/80 rounded-xl border border-white/10 focus-within:border-indigo-500/60 transition-colors">
+              <Search className="w-4 h-4 text-cyan-400 mr-3 shrink-0" />
               <input
                 type="text"
                 value={searchQuery}
@@ -216,7 +218,7 @@ export default function Dashboard() {
                   onClick={() => setSelectedAmenity(pill.id)}
                   className={`px-4 py-2 rounded-xl text-xs font-bold whitespace-nowrap transition-all ${
                     selectedAmenity === pill.id
-                      ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 shadow-emerald-glow'
+                      ? 'bg-indigo-500/25 text-cyan-300 border border-indigo-500/40 shadow-indigo-glow'
                       : 'glass-panel-subtle text-slate-400 hover:text-white border border-white/5'
                   }`}
                 >
@@ -231,7 +233,7 @@ export default function Dashboard() {
         <div className="flex items-center justify-between mb-6">
           <h2 className="text-lg font-bold text-white flex items-center gap-2.5">
             <span>Available Parking Locations</span>
-            <span className="text-xs bg-white/10 text-emerald-300 px-2.5 py-0.5 rounded-full font-mono font-bold">
+            <span className="text-xs bg-indigo-500/20 text-cyan-300 px-2.5 py-0.5 rounded-full font-mono font-bold border border-indigo-500/30">
               {filteredLocations.length}
             </span>
           </h2>
@@ -246,149 +248,135 @@ export default function Dashboard() {
             ))}
           </div>
         ) : filteredLocations.length === 0 ? (
-          <div className="text-center py-16 glass-panel rounded-2xl">
+          <div className="text-center py-16 glass-panel rounded-2xl border border-white/10">
             <Compass className="w-12 h-12 text-slate-500 mx-auto mb-3" />
-            <h3 className="text-base font-bold text-white">No parking hubs match your criteria</h3>
-            <p className="text-xs text-slate-400 mt-1">Try resetting the filter or changing your search terms.</p>
-            <button
-              onClick={() => { setSearchQuery(''); setSelectedAmenity('ALL'); }}
-              className="mt-4 px-4 py-2 rounded-xl glass-panel-subtle text-xs font-bold text-emerald-400 hover:text-emerald-300"
-            >
-              Reset Filters
-            </button>
+            <h3 className="text-base font-bold text-white">No Parking Locations Available</h3>
+            <p className="text-xs text-slate-400 mt-1">
+              {searchQuery ? 'No facilities matched your search keywords.' : 'No active parking locations are registered yet.'}
+            </p>
+            {searchQuery && (
+              <button
+                onClick={() => { setSearchQuery(''); setSelectedAmenity('ALL'); }}
+                className="mt-4 px-4 py-2 rounded-xl glass-panel-subtle text-xs font-bold text-cyan-400 hover:text-cyan-300 border border-cyan-500/30"
+              >
+                Reset Search Filters
+              </button>
+            )}
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {filteredLocations.map((loc) => {
-              const isFav = user?.favorites?.includes(loc._id);
-              const occupancy = loc.occupancyRate || 0;
-              const isHigh = occupancy > 80;
+              const isFavorite = user?.favorites?.includes(loc._id);
 
               return (
                 <div
                   key={loc._id}
                   className="glass-panel-interactive rounded-2xl overflow-hidden flex flex-col justify-between group"
                 >
-                  <div>
-                    {/* Image banner */}
-                    <div className="relative h-48 overflow-hidden">
-                      <img
-                        src={loc.images?.[0]}
-                        alt={loc.name}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-[#060B18] via-transparent to-transparent opacity-80" />
-                      
-                      {/* Top Badges */}
-                      <div className="absolute top-3 left-3 flex items-center gap-1.5">
-                        <span className="bg-[#060B18]/85 backdrop-blur-md px-2.5 py-1 rounded-full text-xs font-bold text-emerald-400 border border-emerald-500/30 flex items-center gap-1.5 shadow-md">
-                          <span className="w-2 h-2 rounded-full bg-emerald-400"></span>
-                          {loc.availableSlots} Free Bays
-                        </span>
-                        {loc.evSlotsCount > 0 && (
-                          <span className="bg-emerald-400 text-[#040711] px-2 py-0.5 rounded-full text-[10px] font-black flex items-center gap-0.5 shadow-md">
-                            <Zap className="w-3 h-3 fill-current" /> {loc.evSlotsCount} EV
-                          </span>
-                        )}
-                      </div>
+                  <Link to={`/parking/${loc._id}`} className="relative h-48 overflow-hidden block">
+                    <img
+                      src={loc.images?.[0]}
+                      alt={loc.name}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#0B0F19] via-transparent to-transparent opacity-80" />
 
-                      {/* Favorite Button */}
-                      <button
-                        onClick={() => toggleFavorite(loc._id)}
-                        className={`absolute top-3 right-3 p-2 rounded-full backdrop-blur-md transition-colors shadow-md ${
-                          isFav ? 'bg-rose-500 text-white' : 'bg-[#060B18]/80 text-slate-300 hover:text-white border border-white/10'
-                        }`}
-                      >
-                        <Heart className="w-4 h-4 fill-current" />
-                      </button>
-
-                      {/* Distance pill */}
-                      <div className="absolute bottom-3 left-3 bg-[#060B18]/85 backdrop-blur-md px-2.5 py-1 rounded-md text-[11px] font-medium text-slate-200 flex items-center gap-1 border border-white/5">
-                        <MapPin className="w-3 h-3 text-emerald-400" /> {loc.distance || 'Near you'}
-                      </div>
+                    <div className="absolute top-3 left-3 bg-[#0B0F19]/90 backdrop-blur-md px-2.5 py-1 rounded-full text-xs font-bold text-cyan-400 border border-cyan-500/30 flex items-center gap-1.5 shadow-md">
+                      <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span>
+                      {loc.availableSlots || 0} Open Bays
                     </div>
 
-                    {/* Content */}
-                    <div className="p-5">
-                      <div className="flex items-center justify-between">
-                        <h3 className="text-base font-bold text-white group-hover:text-emerald-300 transition-colors line-clamp-1">
-                          {loc.name}
-                        </h3>
-                        <span className="text-xs font-bold text-amber-400 shrink-0 ml-2">
-                          ★ {loc.rating}
+                    {user && (
+                      <button
+                        onClick={(e) => {
+                          e.preventDefault();
+                          e.stopPropagation();
+                          toggleFavorite(loc._id);
+                        }}
+                        className="absolute top-3 right-3 p-2 rounded-full bg-black/60 backdrop-blur-md text-white hover:text-rose-400 transition-colors border border-white/10 z-10"
+                      >
+                        <Heart
+                          className={`w-4 h-4 ${isFavorite ? 'fill-rose-500 text-rose-500' : ''}`}
+                        />
+                      </button>
+                    )}
+                  </Link>
+
+                  <div className="p-5 flex-1 flex flex-col justify-between">
+                    <div>
+                      <div className="flex items-start justify-between gap-2">
+                        <Link to={`/parking/${loc._id}`}>
+                          <h3 className="text-lg font-bold text-white group-hover:text-cyan-300 transition-colors leading-snug">
+                            {loc.name}
+                          </h3>
+                        </Link>
+                        <span className="text-xs font-semibold px-2 py-0.5 rounded bg-white/[0.06] text-slate-300 shrink-0">
+                          ★ {loc.rating || '4.9'}
                         </span>
                       </div>
 
-                      <p className="text-xs text-slate-400 mt-1 line-clamp-1">
-                        {loc.address}
+                      <p className="text-xs text-slate-400 flex items-center mt-1.5">
+                        <MapPin className="w-3.5 h-3.5 mr-1 text-cyan-400 shrink-0" />
+                        <span className="truncate">{loc.address}</span>
                       </p>
 
-                      {/* Live Occupancy Meter */}
-                      <div className="mt-4">
-                        <div className="flex justify-between text-[11px] text-slate-400 mb-1">
-                          <span>Occupancy</span>
-                          <span className={isHigh ? 'text-rose-400 font-semibold' : 'text-emerald-400 font-semibold'}>
-                            {occupancy}% Filled
-                          </span>
-                        </div>
-                        <div className="w-full bg-[#040711] rounded-full h-1.5 overflow-hidden border border-white/5">
-                          <div
-                            className={`h-full rounded-full transition-all duration-500 ${
-                              isHigh ? 'bg-rose-500' : 'bg-[#00E676]'
-                            }`}
-                            style={{ width: `${occupancy}%` }}
-                          ></div>
-                        </div>
-                      </div>
+                      <p className="text-xs text-slate-300 mt-2 font-light line-clamp-2">
+                        {loc.tagline}
+                      </p>
 
-                      {/* Amenities */}
-                      <div className="flex flex-wrap gap-1.5 mt-4">
-                        {loc.amenities?.slice(0, 3).map((amenity, idx) => (
-                          <span
-                            key={idx}
-                            className="text-[10px] bg-white/[0.05] text-slate-300 px-2 py-0.5 rounded-md font-medium border border-white/5"
+                      {/* Amenities Pills - Clickable to filter */}
+                      <div className="flex flex-wrap gap-1.5 mt-3">
+                        {loc.amenities?.slice(0, 3).map((a, i) => (
+                          <button
+                            key={i}
+                            onClick={() => {
+                              if (a.toLowerCase().includes('ev')) setSelectedAmenity('EV');
+                              else if (a.toLowerCase().includes('24/7')) setSelectedAmenity('24/7');
+                              else setSearchQuery(a.split(' ')[0]);
+                            }}
+                            className="text-[10px] font-medium px-2 py-0.5 rounded-full bg-white/[0.04] text-slate-300 hover:text-cyan-300 hover:border-cyan-500/40 border border-white/5 transition-colors"
                           >
-                            {amenity}
-                          </span>
+                            {a}
+                          </button>
                         ))}
                       </div>
                     </div>
-                  </div>
 
-                  {/* Card Footer */}
-                  <div className="p-5 pt-0 border-t border-white/[0.08] mt-4 flex items-center justify-between">
-                    <div>
-                      <span className="text-[10px] text-slate-400 block font-medium">Standard Rate</span>
-                      <span className="text-lg font-black text-white">
-                        ₹{loc.pricing?.hourlyRate}
-                        <span className="text-xs font-normal text-slate-400"> / hr</span>
-                      </span>
+                    <div className="pt-4 mt-4 border-t border-white/[0.08] flex items-center justify-between">
+                      <div>
+                        <span className="text-[11px] text-slate-400">Rate from</span>
+                        <p className="text-base font-extrabold text-white">
+                          ₹{loc.pricing?.hourlyRate || 40}<span className="text-xs text-slate-400 font-normal">/hr</span>
+                        </p>
+                      </div>
+
+                      <Link
+                        to={`/parking/${loc._id}`}
+                        className="px-4 py-2.5 rounded-xl btn-primary text-xs font-bold flex items-center gap-1 transition-all"
+                      >
+                        Select Slot <ChevronRight className="w-3.5 h-3.5 stroke-[2.5]" />
+                      </Link>
                     </div>
-
-                    <Link
-                      to={`/parking/${loc._id}`}
-                      className="inline-flex items-center px-4 py-2 rounded-xl text-xs font-bold btn-emerald"
-                    >
-                      <span>Choose Bay</span>
-                      <ArrowRight className="w-3.5 h-3.5 ml-1.5" />
-                    </Link>
                   </div>
                 </div>
               );
             })}
           </div>
         )}
+
       </div>
 
-      {/* Vehicle Management Modal */}
+      {/* Vehicle Garage Modal */}
       {showVehicleModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-md p-4">
-          <div className="glass-panel rounded-3xl w-full max-w-md p-6 sm:p-7 shadow-2xl animate-fadeIn border border-white/15">
-            <div className="flex justify-between items-center mb-4 pb-3 border-b border-white/[0.08]">
-              <h3 className="text-lg font-bold text-white flex items-center gap-2">
-                <Car className="w-5 h-5 text-emerald-400" />
-                <span>My Saved Vehicles</span>
-              </h3>
+        <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-4">
+          <div className="glass-panel w-full max-w-lg rounded-2xl border border-white/10 p-6 shadow-2xl animate-in fade-in zoom-in-95 duration-150">
+            <div className="flex items-center justify-between pb-4 border-b border-white/[0.08]">
+              <div className="flex items-center gap-2.5">
+                <div className="w-8 h-8 rounded-lg bg-indigo-500/20 text-cyan-400 flex items-center justify-center">
+                  <Car className="w-4 h-4" />
+                </div>
+                <h3 className="text-base font-bold text-white">My Vehicle Garage</h3>
+              </div>
               <button
                 onClick={() => setShowVehicleModal(false)}
                 className="text-slate-400 hover:text-white text-sm"
@@ -397,76 +385,84 @@ export default function Dashboard() {
               </button>
             </div>
 
-            {/* Existing Vehicles list */}
-            <div className="space-y-2 mb-6 max-h-48 overflow-y-auto">
-              {user?.vehicles?.length > 0 ? (
-                user.vehicles.map(v => (
-                  <div key={v.id} className="p-3 bg-[#040711]/70 rounded-xl border border-white/10 flex items-center justify-between">
+            {/* Existing Vehicles */}
+            <div className="py-4 space-y-2.5 max-h-56 overflow-y-auto">
+              {user?.vehicles?.length === 0 ? (
+                <div className="text-center py-6 text-slate-400 text-xs">
+                  No vehicles saved yet. Add your license plate below.
+                </div>
+              ) : (
+                user?.vehicles?.map((veh) => (
+                  <div
+                    key={veh.id || veh.plateNumber}
+                    className="flex items-center justify-between p-3 rounded-xl bg-white/[0.03] border border-white/5"
+                  >
                     <div>
-                      <p className="text-xs font-black text-white font-mono tracking-wider">{v.plateNumber}</p>
-                      <p className="text-[11px] text-slate-400">{v.makeModel} • {v.type}</p>
+                      <span className="text-xs font-black font-mono text-cyan-300 px-2 py-0.5 rounded bg-cyan-500/10 border border-cyan-500/20">
+                        {veh.plateNumber}
+                      </span>
+                      <p className="text-xs text-white font-medium mt-1">
+                        {veh.makeModel} <span className="text-[10px] text-slate-400">({veh.type})</span>
+                      </p>
                     </div>
                     <button
-                      onClick={() => removeVehicle(v.id)}
-                      className="text-slate-500 hover:text-rose-400 p-1 transition-colors"
+                      onClick={() => removeVehicle(veh.id || veh.plateNumber)}
+                      className="p-1.5 text-slate-400 hover:text-rose-400 transition-colors"
+                      title="Remove vehicle"
                     >
                       <Trash2 className="w-4 h-4" />
                     </button>
                   </div>
                 ))
-              ) : (
-                <p className="text-xs text-slate-400 text-center py-4">No vehicles saved yet. Add your vehicle below for fast 1-tap bookings.</p>
               )}
             </div>
 
             {/* Add New Vehicle Form */}
-            <form onSubmit={handleAddVehicle} className="space-y-3 pt-3 border-t border-white/[0.08]">
-              <h4 className="text-xs font-bold text-emerald-400 uppercase tracking-wider">Add New Vehicle</h4>
-              
-              <div>
-                <input
-                  type="text"
-                  required
-                  placeholder="License Plate (e.g. MH-02-CP-8899)"
-                  value={newVehicle.plateNumber}
-                  onChange={(e) => setNewVehicle({ ...newVehicle, plateNumber: e.target.value })}
-                  className="w-full bg-[#040711]/80 border border-white/10 rounded-xl px-3 py-2 text-xs text-white placeholder-slate-500 uppercase focus:outline-none focus:border-emerald-500"
-                />
-              </div>
-
+            <form onSubmit={handleAddVehicle} className="pt-4 border-t border-white/[0.08] space-y-3">
+              <p className="text-xs font-bold text-cyan-400 uppercase tracking-wider">Add Vehicle to Profile</p>
               <div className="grid grid-cols-2 gap-2">
                 <input
                   type="text"
                   required
-                  placeholder="Make & Model (e.g. BMW 320d)"
+                  placeholder="Plate (e.g. MH-02-CP-8899)"
+                  value={newVehicle.plateNumber}
+                  onChange={(e) => setNewVehicle({ ...newVehicle, plateNumber: e.target.value.toUpperCase() })}
+                  className="px-3 py-2 rounded-xl bg-[#0B0F19] border border-white/10 text-xs text-white focus:outline-none focus:border-indigo-500/60 font-mono uppercase"
+                />
+                <input
+                  type="text"
+                  required
+                  placeholder="Make & Model (e.g. Nexon EV)"
                   value={newVehicle.makeModel}
                   onChange={(e) => setNewVehicle({ ...newVehicle, makeModel: e.target.value })}
-                  className="w-full bg-[#040711]/80 border border-white/10 rounded-xl px-3 py-2 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-emerald-500"
+                  className="px-3 py-2 rounded-xl bg-[#0B0F19] border border-white/10 text-xs text-white focus:outline-none focus:border-indigo-500/60"
                 />
+              </div>
 
+              <div className="flex items-center gap-2">
                 <select
                   value={newVehicle.type}
                   onChange={(e) => setNewVehicle({ ...newVehicle, type: e.target.value })}
-                  className="w-full bg-[#040711]/80 border border-white/10 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-emerald-500"
+                  className="px-3 py-2 rounded-xl bg-[#0B0F19] border border-white/10 text-xs text-white focus:outline-none focus:border-indigo-500/60"
                 >
-                  <option value="Car">Sedan / Hatchback</option>
-                  <option value="SUV">SUV</option>
+                  <option value="Car">Sedan / Hatchback / SUV</option>
                   <option value="EV">Electric Vehicle (EV)</option>
-                  <option value="Bike">Motorcycle</option>
+                  <option value="Bike">Two-Wheeler</option>
                 </select>
-              </div>
 
-              <button
-                type="submit"
-                disabled={addingVehicle}
-                className="w-full py-2.5 rounded-xl btn-emerald text-xs font-bold transition-all mt-2 disabled:opacity-50"
-              >
-                {addingVehicle ? 'Saving...' : 'Add Vehicle to Garage'}
-              </button>
+                <button
+                  type="submit"
+                  disabled={addingVehicle}
+                  className="flex-1 py-2 rounded-xl btn-primary text-xs font-bold transition-all disabled:opacity-50"
+                >
+                  {addingVehicle ? 'Saving...' : 'Save Vehicle'}
+                </button>
+              </div>
             </form>
           </div>
         </div>
       )}
+
     </div>
   );
 }

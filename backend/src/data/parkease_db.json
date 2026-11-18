@@ -1,27 +1,28 @@
 {
   "users": [
     {
-      "_id": "usr_admin_001",
-      "name": "ParkEase Administrator",
-      "email": "admin@parkease.com",
-      "passwordHash": "$2a$10$NsFuLpAM7Rd.J3vo8.vrxePISGAQsjIDtnSJ62WuNc0SPPwZ54MmG",
-      "role": "admin",
-      "phone": "+91 98765 43210",
-      "avatar": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80",
-      "vehicles": [
-        {
-          "id": "veh_01",
-          "plateNumber": "KA-01-AB-1234",
-          "makeModel": "Tesla Model 3",
-          "type": "EV",
-          "color": "Pearl White"
-        }
-      ],
-      "favorites": [
-        "loc_001",
-        "loc_002"
-      ],
-      "createdAt": "2026-11-12T11:34:53.080Z"
+      "_id": "usr_54fe1921",
+      "name": "Jeevaa A S",
+      "email": "asjeevaa@gmai.com",
+      "passwordHash": "$2a$10$G.4O2SAJrQLcyNA6D8rEy.8BJkLnJV.kjtspbQqXjLZu71XGD6xxy",
+      "phone": "",
+      "role": "user",
+      "avatar": "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=200&q=80",
+      "vehicles": [],
+      "favorites": [],
+      "createdAt": "2026-11-15T12:05:59.022Z"
+    },
+    {
+      "_id": "usr_298b7742",
+      "name": "Test Driver",
+      "email": "driver_test_1794743161585@example.com",
+      "passwordHash": "$2a$10$CAM183pYBiODqfhAeC/AM.c3CIp/lAmJ5FQIoo5EcVYE9fZLGaF06",
+      "phone": "+91 99999 88888",
+      "role": "user",
+      "avatar": "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=200&q=80",
+      "vehicles": [],
+      "favorites": [],
+      "createdAt": "2026-11-15T11:46:01.750Z"
     },
     {
       "_id": "usr_demo_002",
@@ -52,6 +53,108 @@
         "loc_003"
       ],
       "createdAt": "2026-11-12T11:34:53.088Z"
+    },
+    {
+      "_id": "usr_be9d9dbf",
+      "name": "SQLite Driver",
+      "email": "sqlite_driver_1794747820870@example.com",
+      "passwordHash": "$2a$10$f.in7hlvEawCyJQBOLRX9.JeDuDwo.qVeiGSJeNhKR5he8mH9/ABK",
+      "phone": "+91 9876543210",
+      "role": "admin",
+      "avatar": "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=200&q=80",
+      "vehicles": [],
+      "favorites": [],
+      "createdAt": "2026-11-15T13:03:40.990Z",
+      "updatedAt": "2026-11-15T13:04:25.435Z"
+    },
+    {
+      "_id": "usr_1cc97b1e",
+      "name": "Govindammal S",
+      "email": "govis@gmail.com",
+      "passwordHash": "$2a$10$WQ9xr06Uhte9B41ijBHgAO7kjucX8OO79ujRlPBnWDrKPu0IthM/6",
+      "phone": "",
+      "role": "user",
+      "avatar": "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=200&q=80",
+      "vehicles": [],
+      "favorites": [],
+      "createdAt": "2026-11-15T13:06:07.857Z"
+    },
+    {
+      "_id": "usr_bafe99e5",
+      "name": "Standard Driver",
+      "email": "driver_user_1794749373562@example.com",
+      "passwordHash": "$2a$10$/FNFiWjsaYtr9kwVzm4qjeiHrSUH.9/pNZ00J7gYt1MS1dksEunQ6",
+      "phone": "",
+      "role": "user",
+      "avatar": "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=200&q=80",
+      "vehicles": [],
+      "favorites": [],
+      "createdAt": "2026-11-15T13:29:33.739Z"
+    },
+    {
+      "_id": "usr_518abaf6",
+      "name": "Standard Driver",
+      "email": "driver_user_1794749464454@example.com",
+      "passwordHash": "$2a$10$vAttZGX8Q0K0s3M37pOTLOcPsN9lHQpYHY8StrP9PMszWYJkWsWh6",
+      "phone": "",
+      "role": "user",
+      "avatar": "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=200&q=80",
+      "vehicles": [],
+      "favorites": [],
+      "createdAt": "2026-11-15T13:31:04.618Z"
+    },
+    {
+      "_id": "usr_af7fe5e3",
+      "name": "Jeevaa A S",
+      "email": "asjeevaaslm@gmail.com",
+      "passwordHash": "$2a$10$DNv89f5Vapw0WqLl5dogjOjMsYQj1dbcN6Wdr2/IcCTs8CCpwkJDO",
+      "phone": "",
+      "role": "admin",
+      "avatar": "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=200&q=80",
+      "vehicles": [],
+      "favorites": [],
+      "createdAt": "2026-11-15T10:48:11.869Z",
+      "updatedAt": "2026-11-18T06:20:41.116Z",
+      "mustChangePassword": true
+    },
+    {
+      "_id": "usr_admin_001",
+      "name": "ParkEase Administrator",
+      "email": "admin@parkease.com",
+      "passwordHash": "$2a$10$wxOnsyKXxNNmOSNzpwOWfuKNViHGx0yWW0CbWI3Nan1PdX5pWQj0a",
+      "role": "admin",
+      "phone": "+91 98765 43210",
+      "avatar": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80",
+      "vehicles": [
+        {
+          "id": "veh_01",
+          "plateNumber": "KA-01-AB-1234",
+          "makeModel": "Tesla Model 3",
+          "type": "EV",
+          "color": "Pearl White"
+        }
+      ],
+      "favorites": [
+        "loc_001",
+        "loc_002"
+      ],
+      "createdAt": "2026-11-12T11:34:53.080Z",
+      "updatedAt": "2026-11-18T06:20:41.189Z",
+      "mustChangePassword": true
+    },
+    {
+      "_id": "usr_95cfdde4",
+      "name": "Jeevaa A S",
+      "email": "asjeevaa@gmail.com",
+      "passwordHash": "$2a$10$MY00jgcX/LhjQILhIbCzdOdZEkifHrjALB.s2OLJzPaU3CZCItdUu",
+      "phone": "",
+      "role": "admin",
+      "avatar": "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=200&q=80",
+      "vehicles": [],
+      "favorites": [],
+      "createdAt": "2026-11-15T11:20:01.987Z",
+      "updatedAt": "2026-11-18T06:20:41.268Z",
+      "mustChangePassword": true
     }
   ],
   "locations": [
@@ -123,72 +226,6 @@
         "Level 1 (P1)",
         "Level 2 (P2)"
       ]
-    },
-    {
-      "_id": "loc_003",
-      "name": "Skyline Terminal & Airport Express Deck",
-      "tagline": "Long-Stay & Priority Valet with Terminal Shuttles",
-      "address": "Airport Bypass Expressway, Terminal 3 Gate 4",
-      "coordinates": {
-        "lat": 28.5562,
-        "lng": 77.1
-      },
-      "distance": "5.4 km away",
-      "pricing": {
-        "hourlyRate": 60,
-        "dayPassRate": 500
-      },
-      "totalSlots": 40,
-      "rating": 4.95,
-      "reviewCount": 512,
-      "operatingHours": "24/7 Always Open",
-      "images": [
-        "https://images.unsplash.com/photo-1617814076367-b759c7d7e738?auto=format&fit=crop&w=800&q=80",
-        "https://images.unsplash.com/photo-1517524008697-84bbe3c3fd98?auto=format&fit=crop&w=800&q=80"
-      ],
-      "amenities": [
-        "Free Airport Shuttle",
-        "Luggage Assistance",
-        "Underground Climate Control",
-        "High-Res CCTV",
-        "Fast EV Superchargers"
-      ],
-      "floors": [
-        "Terminal Wing A",
-        "Terminal Wing B"
-      ]
-    },
-    {
-      "_id": "loc_004",
-      "name": "Palms Galleria & Lifestyle Mall",
-      "tagline": "Premium Shopping Mall Parking with Family & Accessible Bays",
-      "address": "808 Promenade Mall Road, Westside Galleria",
-      "coordinates": {
-        "lat": 28.4595,
-        "lng": 77.0266
-      },
-      "distance": "3.6 km away",
-      "pricing": {
-        "hourlyRate": 35,
-        "dayPassRate": 300
-      },
-      "totalSlots": 32,
-      "rating": 4.7,
-      "reviewCount": 180,
-      "operatingHours": "09:00 AM - 12:00 AM",
-      "images": [
-        "https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1?auto=format&fit=crop&w=800&q=80"
-      ],
-      "amenities": [
-        "Direct Mall Elevator Entry",
-        "Accessible Parking",
-        "Family Parking",
-        "Pre-booking Discounts"
-      ],
-      "floors": [
-        "Basement 1 (B1)",
-        "Basement 2 (B2)"
-      ]
     }
   ],
   "slots": [
@@ -204,7 +241,8 @@
         "50kW DC Fast Charging",
         "Universal Type 2 Plug"
       ],
-      "currentVehicle": null
+      "currentVehicle": null,
+      "updatedAt": "2026-11-15T11:13:22.121Z"
     },
     {
       "_id": "slot_loc001_G_02",
@@ -241,7 +279,7 @@
       "slotNumber": "G-04",
       "floor": "Ground Floor (G)",
       "type": "VIP",
-      "status": "reserved",
+      "status": "available",
       "hourlyRate": 60,
       "features": [
         "Extra Wide Bay",
@@ -269,12 +307,13 @@
       "slotNumber": "G-06",
       "floor": "Ground Floor (G)",
       "type": "Accessible",
-      "status": "available",
+      "status": "booked",
       "hourlyRate": 40,
       "features": [
         "Wide Angle Camera Coverage"
       ],
-      "currentVehicle": null
+      "currentVehicle": "KA-01-AB-1234",
+      "updatedAt": "2026-11-15T11:20:22.285Z"
     },
     {
       "_id": "slot_loc001_G_07",
@@ -282,12 +321,12 @@
       "slotNumber": "G-07",
       "floor": "Ground Floor (G)",
       "type": "Standard",
-      "status": "booked",
+      "status": "available",
       "hourlyRate": 40,
       "features": [
         "Wide Angle Camera Coverage"
       ],
-      "currentVehicle": "DL-01-XX-9900"
+      "currentVehicle": null
     },
     {
       "_id": "slot_loc001_G_08",
@@ -347,12 +386,12 @@
       "slotNumber": "G-12",
       "floor": "Ground Floor (G)",
       "type": "Standard",
-      "status": "booked",
+      "status": "available",
       "hourlyRate": 40,
       "features": [
         "Wide Angle Camera Coverage"
       ],
-      "currentVehicle": "DL-01-XX-9900"
+      "currentVehicle": null
     },
     {
       "_id": "slot_loc001_G_13",
@@ -440,13 +479,13 @@
       "slotNumber": "P1-03",
       "floor": "Level 1 (P1)",
       "type": "EV",
-      "status": "booked",
+      "status": "available",
       "hourlyRate": 50,
       "features": [
         "50kW DC Fast Charging",
         "Universal Type 2 Plug"
       ],
-      "currentVehicle": "DL-01-XX-9900"
+      "currentVehicle": null
     },
     {
       "_id": "slot_loc001_P1_04",
@@ -508,12 +547,12 @@
       "slotNumber": "P1-08",
       "floor": "Level 1 (P1)",
       "type": "Standard",
-      "status": "booked",
+      "status": "available",
       "hourlyRate": 40,
       "features": [
         "Wide Angle Camera Coverage"
       ],
-      "currentVehicle": "DL-01-XX-9900"
+      "currentVehicle": null
     },
     {
       "_id": "slot_loc001_P1_09",
@@ -812,7 +851,7 @@
       "slotNumber": "P2-15",
       "floor": "Level 2 (P2)",
       "type": "Standard",
-      "status": "unavailable",
+      "status": "available",
       "hourlyRate": 40,
       "features": [
         "Wide Angle Camera Coverage"
@@ -851,12 +890,12 @@
       "slotNumber": "P1-02",
       "floor": "Level 1 (P1)",
       "type": "EV",
-      "status": "booked",
+      "status": "available",
       "hourlyRate": 65,
       "features": [
         "60kW Rapid Charger"
       ],
-      "currentVehicle": "KA-03-ZZ-3344"
+      "currentVehicle": null
     },
     {
       "_id": "slot_loc002_P1_03",
@@ -890,7 +929,7 @@
       "slotNumber": "P1-05",
       "floor": "Level 1 (P1)",
       "type": "VIP",
-      "status": "reserved",
+      "status": "available",
       "hourlyRate": 75,
       "features": [
         "Sensor Protected"
@@ -942,12 +981,12 @@
       "slotNumber": "P1-09",
       "floor": "Level 1 (P1)",
       "type": "Standard",
-      "status": "booked",
+      "status": "available",
       "hourlyRate": 50,
       "features": [
         "Sensor Protected"
       ],
-      "currentVehicle": "KA-03-ZZ-3344"
+      "currentVehicle": null
     },
     {
       "_id": "slot_loc002_P1_10",
@@ -1085,12 +1124,12 @@
       "slotNumber": "P2-02",
       "floor": "Level 2 (P2)",
       "type": "EV",
-      "status": "booked",
+      "status": "available",
       "hourlyRate": 65,
       "features": [
         "60kW Rapid Charger"
       ],
-      "currentVehicle": "KA-03-ZZ-3344"
+      "currentVehicle": null
     },
     {
       "_id": "slot_loc002_P2_03",
@@ -1124,7 +1163,7 @@
       "slotNumber": "P2-05",
       "floor": "Level 2 (P2)",
       "type": "VIP",
-      "status": "reserved",
+      "status": "available",
       "hourlyRate": 75,
       "features": [
         "Sensor Protected"
@@ -1176,12 +1215,12 @@
       "slotNumber": "P2-09",
       "floor": "Level 2 (P2)",
       "type": "Standard",
-      "status": "booked",
+      "status": "available",
       "hourlyRate": 50,
       "features": [
         "Sensor Protected"
       ],
-      "currentVehicle": "KA-03-ZZ-3344"
+      "currentVehicle": null
     },
     {
       "_id": "slot_loc002_P2_10",
@@ -1303,130 +1342,121 @@
   ],
   "bookings": [
     {
-      "_id": "bk_demo_1001",
-      "bookingReference": "PE-2026-90412",
-      "userId": "usr_demo_002",
-      "userName": "Alex Mercer",
-      "userEmail": "user@parkease.com",
-      "userPhone": "+91 91234 56789",
+      "_id": "bk_c10f66e3",
+      "bookingReference": "PE-2026-10491",
+      "userId": "usr_95cfdde4",
+      "userName": "Jeevaa A S",
+      "userEmail": "asjeevaa@gmail.com",
+      "userPhone": "",
       "locationId": "loc_001",
       "locationName": "Grand Central Horizon Plaza",
       "locationAddress": "77 Downtown Avenue, Financial District, Tech Metropolis",
-      "slotId": "slot_loc001_G_02",
-      "slotNumber": "G-02",
+      "slotId": "slot_loc001_G_06",
+      "slotNumber": "G-06",
       "floor": "Ground Floor (G)",
-      "slotType": "EV",
+      "slotType": "Accessible",
       "vehicle": {
-        "plateNumber": "MH-02-CP-8899",
-        "makeModel": "BMW 3 Series M-Sport",
+        "plateNumber": "KA-01-AB-1234",
+        "makeModel": "Standard Passenger Vehicle",
         "type": "Car"
       },
-      "startTime": "2026-11-12T10:49:53.089Z",
-      "endTime": "2026-11-12T13:49:53.089Z",
-      "durationHours": 3,
-      "ratePerHour": 50,
-      "subtotal": 150,
-      "taxes": 27,
-      "totalAmount": 177,
-      "paymentStatus": "PAID",
-      "paymentMethod": "UPI / Google Pay",
-      "paymentReference": "UPI-RAZORPAY-882941042",
-      "bookingStatus": "COMPLETED",
-      "qrCodeData": "{\"bookingRef\":\"PE-2026-90412\",\"slot\":\"G-02\",\"locationId\":\"loc_001\",\"plateNumber\":\"MH-02-CP-8899\",\"validUntil\":\"2026-11-12T13:49:53.089Z\",\"token\":\"SECURE_GATE_TOKEN_9921_OK\"}",
-      "entryTime": "2026-11-12T11:04:53.089Z",
-      "exitTime": "2026-11-12T11:54:37.899Z",
-      "createdAt": "2026-11-12T10:34:53.089Z",
-      "updatedAt": "2026-11-12T11:54:37.899Z"
-    },
-    {
-      "_id": "bk_demo_1000",
-      "bookingReference": "PE-2026-87140",
-      "userId": "usr_demo_002",
-      "userName": "Alex Mercer",
-      "userEmail": "user@parkease.com",
-      "userPhone": "+91 91234 56789",
-      "locationId": "loc_001",
-      "locationName": "Grand Central Horizon Plaza",
-      "locationAddress": "77 Downtown Avenue, Financial District, Tech Metropolis",
-      "slotId": "slot_loc001_G_07",
-      "slotNumber": "G-07",
-      "floor": "Ground Floor (G)",
-      "slotType": "Standard",
-      "vehicle": {
-        "plateNumber": "MH-02-CP-8899",
-        "makeModel": "BMW 3 Series M-Sport",
-        "type": "Car"
-      },
-      "startTime": "2026-11-10T11:34:53.089Z",
-      "endTime": "2026-11-10T13:34:53.089Z",
+      "startTime": "2026-11-15T08:30:00.000Z",
+      "endTime": "2026-11-15T10:30:00.000Z",
       "durationHours": 2,
       "ratePerHour": 40,
       "subtotal": 80,
       "taxes": 14.4,
-      "totalAmount": 94.4,
+      "totalAmount": 94,
       "paymentStatus": "PAID",
-      "paymentMethod": "UPI / PhonePe",
-      "paymentReference": "UPI-RAZORPAY-771920311",
-      "bookingStatus": "COMPLETED",
-      "qrCodeData": "{\"bookingRef\":\"PE-2026-87140\",\"slot\":\"G-07\",\"locationId\":\"loc_001\"}",
-      "entryTime": "2026-11-10T11:39:53.089Z",
-      "exitTime": "2026-11-10T13:34:03.089Z",
-      "createdAt": "2026-11-10T11:04:53.089Z"
+      "paymentMethod": "UPI (driver@okaxis)",
+      "paymentReference": "UPI-27008DF1-38D",
+      "bookingStatus": "ACTIVE",
+      "qrCodeData": "{\"bookingRef\":\"PE-2026-10491\",\"bookingId\":\"bk_c10f66e3\",\"userId\":\"usr_95cfdde4\",\"locationId\":\"loc_001\",\"locationName\":\"Grand Central Horizon Plaza\",\"slotId\":\"slot_loc001_G_06\",\"slotNumber\":\"G-06\",\"plateNumber\":\"KA-01-AB-1234\",\"validFrom\":\"2026-11-15T08:30:00.000Z\",\"validUntil\":\"2026-11-15T10:30:00.000Z\",\"totalPaid\":94,\"securitySign\":\"SEC-YmtfYzEwZjY2ZTMy\"}",
+      "qrDataUrl": "data:image/png;base64,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+sDDWmut9YGHtdZa6wP//P4XByEzdSVfCpmTruSNkDnpSqaQmbqSGyHzpa5kCpmpK5lC5o2uZAqZG13JFDJTV3ISMlNXchIyU1dyEjInXckUMiddyUnIvNGVTCFz0pVMIXOjK5lC5kZXMoXMSVdyI2ROupI3QuakK7kRMje6kilkTrqSk5CZupIpZE66khsPa6211gce1lprrQ88rLXWWh/4xR90JSchc9KVTCEzdSVTyJyEzNSVTCEzdSUnITN1JVPITF3JFDJTVzKFzBshM3UlU8hMXckUMlNXchIyJ13Jl0Lmja5kCpmpK3mjK5lC5kZXMoXM1JVMIfO/rCuZQuakK7kRMlNXciNkTrqSKWSmrmQKmZOQ+VLITF3JScjcCJmTruSNh7XWWusDD2uttdYHHtZaa60P/OIPQmbqSqauZAqZKWSmrmQKmZOQudGVTCEzdSU3upI3upIpZKau5CRkppA5CZmpKzkJmRshM3UlU8ichMxJV3IjZH5SyNwImakrOQmZqSuZQuaNruQndSVTyJx0JV/qSk5C5kbI3OhKboTM1JVMIXMSMje6kilkftLDWmut9YGHtdZa6wMPa6211gf++f0vDkJm6kpOQmbqSqaQmbqSKWROupIpZN7oSk5CZupKppA56UreCJmTruQkZG50JSchM3UlU8icdCVTyJx0JVPInHQlb4TM1JVMIfOlrmQKmTe6kilkbnQlN0Jm6kqmkJm6kilkbnQlU8hMXckUMiddyRQyU1cyhcxJV/KlkJm6kilkpq7kRshMXckUMlNXcvKw1lprfeBhrbXW+sDDWmut9YFffKwrmULmJGSmrmQKmTe6kpOQuREyJ13JFDJ/U8j8pK7kJ3UlU8jcCJkbXclJyExdyUnITF3JSchMXckbITN1JSch80ZXMoXM1JX8l7qSk5A5CZk3QuakKznpSm6EzElXchIyU1dy42Gttdb6wMNaa631gYe11lrrA//8/hcXQuZGV/KlkJm6kilkTrqSKWSmrmQKmTe6khsh85O6khshc6MrmUJm6kqmkJm6kpOQmbqSk5B5oyt5I2SmrmQKmakrmULmpCuZQuakK5lCZupKppCZupIpZG50JSchM3UlU8i80ZX8l0Lmja7kJGRudCVfelhrrbU+8LDWWmt94GGttdb6wD+//8VByJx0JVPITF3JFDInXcn/JSEz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",
+      "entryTime": null,
+      "exitTime": null,
+      "createdAt": "2026-11-15T11:20:22.284Z"
+    },
+    {
+      "_id": "bk_cf01ac26",
+      "bookingReference": "PE-2026-42872",
+      "userId": "usr_518abaf6",
+      "userName": "Standard Driver",
+      "userEmail": "driver_user_1794749464454@example.com",
+      "userPhone": "",
+      "locationId": "loc_4d58011c",
+      "locationName": "Skyline Tech Park Hub",
+      "locationAddress": "77 Cyber Road, Outer Ring",
+      "slotId": "slot_279a498d",
+      "slotNumber": "X-99",
+      "floor": "G",
+      "slotType": "FOUR_WHEELER",
+      "vehicle": {
+        "plateNumber": "KA-05-MM-1234",
+        "type": "FOUR_WHEELER"
+      },
+      "startTime": "2026-11-15T14:31:04.808Z",
+      "endTime": "2026-11-15T15:31:04.808Z",
+      "durationHours": 1,
+      "ratePerHour": 60,
+      "subtotal": 60,
+      "taxes": 10.8,
+      "totalAmount": 71,
+      "paymentStatus": "REFUNDED",
+      "paymentMethod": "GPAY",
+      "paymentReference": "UPI-0DBCCAC9-93B",
+      "bookingStatus": "CANCELLED",
+      "qrCodeData": "{\"bookingRef\":\"PE-2026-42872\",\"bookingId\":\"bk_cf01ac26\",\"userId\":\"usr_518abaf6\",\"locationId\":\"loc_4d58011c\",\"locationName\":\"Skyline Tech Park Hub\",\"slotId\":\"slot_279a498d\",\"slotNumber\":\"X-99\",\"plateNumber\":\"KA-05-MM-1234\",\"validFrom\":\"2026-11-15T14:31:04.808Z\",\"validUntil\":\"2026-11-15T15:31:04.808Z\",\"totalPaid\":71,\"securitySign\":\"SEC-YmtfY2YwMWFjMjYy\"}",
+      "qrDataUrl": "data:image/png;base64,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gd9c6kpOQmbqSqaQmbqSG13JFDJTV3IjZG50JVPITF3JFDI3QuakK5lC5iRkpq7kJGSmrmTqSqaQOelKppCZupI3upIpZKaQmbqSG13JSVfypZCZupIbITN1JVPI3AiZqSuZQmYKmakrmUJm6kqmkJm6kilkTrqSKWROQuakK5lC5iRkbnQlN0LmJGROupKTruSNh7XWWusDD2uttdYHHtZaa60P/PrzDw5CZupKppCZupKTkHmjK5lC5o2u5CRkvtSVTCEzdSVTyLzRldwImZOu5CRk3uhKTkJm6kqmkJm6kpOQeaMrmUJm6kqmkJm6kpOQOelKppCZupIbITN1JVPITF3JSchMXcmNkPlJXcmNkJm6kpOQmbqSKWROupIbITN1JVPInHQlU8hMXcnJw1prrfWBh7XWWusDD2uttdYHfv35Bz8oZKau5EbInHQlJyEzdSVTyNzoSqaQOelKTkLmpCuZQuakK5lC5qQr+VLInHQlU8hMXckUMlNXciNkTrqSk5CZupIpZKau5CRkpq5kCpmpK3kjZE66kilkTrqSGyFz0pW8ETInXcmNkJm6kilk3uhKTkLmpCuZQuakKzkJmZOu5MbDWmut9YGHtdZa6wMPa6211gd+/fkHF0Jm6kreCJmpK7kRMiddyRQyU1dyI2RudCVTyJx0JVPInHQlJyHzRlcyhcyNruQkZE66kilkTrqSKWS+1JV8KWSmruQkZG50JVPInHQlJyFz0pV8KWRudCUnITN1JW+EzNSVnITM1JVMITN1JSchc9KVTCHzRldy8rDWWmt94GGttdb6wMNaa631gd9c6kpOQmbqSqaQmbqSk5D5UlcyhczUlUwhM3UlU8h8KWROupK/KWROupIpZKaQOelK3uhKppCZupIpZKauZAqZqSs5CZmpKzkJmakreaMrmULmpCuZQuYkZE66kilkpq7kRshMXckUMlNXchIyJyHzpZA56UqmkJm6kilkpq5k6kqmkDnpSn7Sw1prrfWBh7XWWusDD2uttdYHfvOxrmQKmZOQudGVTCHzRlcyhcxJyExdyUnInHQlJyFzEjInXckUMlNX8pO6kilkTkLmpCuZQmbqSqaQ+UldyRQyU1dyI2SmrmTqSqaQmbqSKWROupKTrmQKmSlkpq7kRshMXcmNkPlSV3ISMiddyRshcyNkboTM1JVMITN1JTce1lprrQ88rLXWWh94WGuttT7wm0shM3UlJ13JFDJTVzKFzNSVTCEzdSU3QuaNruSNrmQKmRshM3UlN7qSGyEzdSVTyExdyRQyU1cyhczUlUwhc9KVnHQlU8jcCJmpK5lCZupKvhQyJ13JFDJvhMxJVzKFzEnI3AiZk65kCpmpK3kjZKau5KQrOQmZqSt5I2RuhMzf9LDWWmt94GGttdb6wMNaa631gV9//sFByJx0JVPITF3JFDInXckUMlNXchIyU1cyhczUldwImakrOQmZqSuZQmbqSk5C5ktdyUnInHQlU8hMXckUMlNXMoXM1JVMITN1JW+EzJe6khshc9KVTCEzdSVTyLzRlZyEzBtdyRshM3UlU8jc6Eq+FDL/S13JFDJTV3IjZKau5ORhrbXW+sDDWmut9YGHtdZa6wO//vyDg5CZupIpZG50JX9TyNzoSm6EzElXchIyJ13JGyHzRlcyhczUlZyEzNSV3AiZqSuZQmbqSqaQOelKppCZupIpZKau5CRkpq5kCpmpK7kRMlNXchIyU1dyEjJTVzKFzElXMoXMSVdyI2Te6EqmkDnpSk5CZupKTkJm6kq+FDInXcmXHtZaa60PPKy11lofeFhrrbU+8OvPPzgImb+pK/lSyJx0JSchc9KVTCEzdSVTyExdyRQyU1dyEjInXckUMlNXchIyU1dyEjJf6kpuhMxJVzKFzElXMoXMSVfyRshMXckUMlNXchIyU1fyRsicdCUnITN1JSchM3UlJyHzRlcyhcxJV/JGyJx0JVPInHQlN0Jm6kqmkJm6kpOHtdZa6wMPa6211gce1lprrQ/8+vMPLoTMja5kCpmpK3kjZKauZAqZG13JSchMXckUMlNX8kbInHQlN0LmpCv5XwqZL3UlU8i80ZW8ETJTV/JGyExdyUnITF3JFDInXckUMiddyRQyb3QlU8hMXckbITN1JVPITF3JSchMXcmNkLnRlZyEzNSVTCEzdSU3HtZaa60PPKy11lofeFhrrbU+8OvPP/hQyLzRlfwvhcyNruRGyLzRlUwhc6MrmUJm6kqmkJm6khshc6MrOQmZG13JFDI3upIpZE66kilkpq5kCpmpK5lCZupKppCZupIpZE66khshM3UlJyEzdSVTyExdyRQyb3QlU8icdCU3QuZLXckUMl/qSk5C5qQrOXlYa621PvCw1lprfeBhrbXW+sBv/kXITF3JSVfyN4XM1JVMITN1JSddyUnIvNGV3AiZG13J3xQyJ13JScj8TV3Jl7qSKWSmrmQKmRtdyUlXcqMrmUJm6kqmkJm6kpOQmbqSKWROQuaNrmQKmRshc6MrmUJm6kpuhMzUlUwhM3UlU8hMXcmNruSNh7XWWusDD2uttdYHHtZaa60P/OZSyExdyY2QOelKppA56UpuhMxJV3LSldwImZOu5EbITF3JG13JjZA56UqmkHkjZKau5CRkppCZupIbIXMSMichM3UlU8hMITN1JVPITF3JSVfyk0Jm6kre6EqmkJm6kilkppCZupIpZE66kje6kilkpq5kCpk3QuZGyJx0JVPITF3JycNaa631gYe11lrrAw9rrbXWB379+QcHITN1JVPITF3JFDJTV3ISMlNX8pNCZupKflLI3OhKppC50ZVMIXPSlUwhM3Ulb4TMT+pKppA56Uq+FDInXckUMlNX8kbITF3JFDJTVzKFzNSVfClkpq5kCpmpK7kRMiddyRQyU1cyhcxJV3ISMlNXMoXMSVcyhczUlZyEzNSV/KSHtdZa6wMPa6211gce1lprrQ/85mMhcxIyPylkpq7kJ4XM39SVTCEzdSV/U8icdCUnXcn/UshMXclJyNzoSt4ImakrOelKppA5CZmpK5lC5o2uZOpKTrqSKWRudCVTyEwhcxIyU1fypZCZupKTkJm6khtdyY2QOelKTh7WWmutDzystdZaH3hYa621PvDrzz84CJkbXclJyExdyRQyU1cyhcyXupIpZH5SV3ISMje6kpOQmbqSKWSmruRGyJx0JSchc6MreSNkTrqSL4XMG13JGyEzdSVTyJx0JVPITF3JFDInXckUMiddyRQyU1dyEjJTVzKFzI2uZAqZN7qSGyEzdSVTyJx0JTdCZupKTh7WWmutDzystdZaH3hYa621PvDrzz84CJmpKzkJmf+SruQkZKau5CRkpq7kRshMXckUMlNXchIyU1fyRsj8pK7kRshMXckUMlNX8kbITF3JFDJTVzKFzI2u5EbITF3JFDI/qSuZ/k+iYQAAABSRSURBVF97cGwrSLYjUfB0oTVq9IL+G5NepEa5d0RKd3BR9frPAoyILKa2mCKLk7b4UmTxRlvciCymtpgii6ktbkQW/yVtcfKw1lprfeBhrbXW+sDDWmut9YHfXIospra4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yGJqixttMUUWU1vciCzeiCxOIoupLd5oiymyuBFZTG1xEllMbTFFFlNbnEQWX4os3ogsprY4iSymtjh5WGuttT7wsNZaa33gYa211vrAb/6faYuTyGJqixuRxdQWNyKLk8hiaoupLabIYmqLk8jipC1OIos32uJGZDG1xY22mCKLk8hiaospsjhpixttMUUWU1ucRBYnkcXUFjfaYoosprY4iSymtjiJLKa2mNpiiiy+FFnciCymtjiJLG60xRRZTG0xRRY32uJvelhrrbU+8LDWWmt94GGttdb6wG/+n4ssbkQWJ23xRlvciCxuRBYnbTFFFjfaYoos3ogsflJk8UZkcdIWJ21xoy2myOJLkcXf1BZTZDG1xdQWN9riJLKY2uJGZHHSFlNkMbXF1BZTZDG1xRRZTG1x0hZTZHESWZy0xZce1lprrQ88rLXWWh94WGuttT7wm5fa4ie1xY22mCKLvymyuNEWJ5HFjchiaouTyOKkLabI4iSymNpiiiymtpgii6ktbrTFFFlMbTFFFlNbTJHF1BYnkcX/UltMkcXUFidtcRJZ3IgsTtriJLKY2uIksvhJbXGjLabIYmqLKbI4aYuTtpgii6ktftLDWmut9YGHtdZa6wMPa6211gd+cymy+C9pi5O2OIksTiKLk7Z4I7KY2uKkLU4iiymyOGmLKbL4SW1xI7J4oy2myOIkspjaYoospra40RY3IouTtjhpi5PI4qQtpra4EVm80RY32mKKLKa2mCKLk8jipC2myOJGZDG1xUlkcaMtpshiaospsnjjYa211vrAw1prrfWBh7XWWusDv/78g7XWWuulh7XWWusDD2uttdYHHtZaa60PPKy11lofeFhrrbU+8LDWWmt94GGttdb6wP8Bps+BvoK7qMUAAAAASUVORK5CYII=",
+      "entryTime": "2026-11-15T13:31:04.873Z",
+      "exitTime": null,
+      "createdAt": "2026-11-15T13:31:04.862Z",
+      "updatedAt": "2026-11-15T13:31:04.884Z",
+      "cancellationReason": "Test Suite Slot Release"
     }
   ],
   "payments": [
     {
-      "_id": "pay_001",
-      "bookingId": "bk_demo_1001",
-      "bookingReference": "PE-2026-90412",
-      "userId": "usr_demo_002",
-      "userName": "Alex Mercer",
-      "amount": 177,
+      "_id": "pay_ec821d18",
+      "bookingId": "bk_c10f66e3",
+      "bookingReference": "PE-2026-10491",
+      "userId": "usr_95cfdde4",
+      "userName": "Jeevaa A S",
+      "amount": 94,
       "currency": "INR",
-      "method": "UPI (Google Pay)",
-      "upiId": "alexmercer@okaxis",
+      "method": "UPI (driver@okaxis)",
+      "upiId": "jeevaaas@okaxis",
       "status": "SUCCESS",
-      "transactionId": "TXN_UPI_983712984",
-      "createdAt": "2026-11-12T10:34:53.089Z"
+      "transactionId": "UPI-27008DF1-38D",
+      "createdAt": "2026-11-15T11:20:22.284Z"
     },
     {
-      "_id": "pay_002",
-      "bookingId": "bk_demo_1000",
-      "bookingReference": "PE-2026-87140",
-      "userId": "usr_demo_002",
-      "userName": "Alex Mercer",
-      "amount": 94.4,
+      "_id": "pay_040d2b6d",
+      "bookingId": "bk_cf01ac26",
+      "bookingReference": "PE-2026-42872",
+      "userId": "usr_518abaf6",
+      "userName": "Standard Driver",
+      "amount": 71,
       "currency": "INR",
-      "method": "UPI (PhonePe)",
-      "upiId": "alexmercer@ybl",
+      "method": "GPAY",
+      "upiId": "standarddriver@okaxis",
       "status": "SUCCESS",
-      "transactionId": "TXN_UPI_652199843",
-      "createdAt": "2026-11-10T11:04:53.089Z"
+      "transactionId": "UPI-0DBCCAC9-93B",
+      "createdAt": "2026-11-15T13:31:04.864Z"
     }
   ],
   "vehicles": [],
   "entryLogs": [
     {
-      "_id": "log_9bf609a1",
-      "bookingId": "bk_demo_1001",
-      "bookingReference": "PE-2026-90412",
-      "slotNumber": "G-02",
-      "plateNumber": "MH-02-CP-8899",
-      "action": "EXIT",
-      "scannedAt": "2026-11-12T11:54:37.899Z",
-      "verifiedBy": "Gate Barrier 01",
-      "status": "BARRIER_OPENED"
-    },
-    {
-      "_id": "log_001",
-      "bookingId": "bk_demo_1001",
-      "bookingReference": "PE-2026-90412",
-      "slotNumber": "G-02",
-      "plateNumber": "MH-02-CP-8899",
+      "_id": "log_1a9149f9",
+      "bookingId": "bk_cf01ac26",
+      "bookingReference": "PE-2026-42872",
+      "slotNumber": "X-99",
+      "plateNumber": "KA-05-MM-1234",
       "action": "ENTRY",
-      "scannedAt": "2026-11-12T11:04:53.089Z",
-      "verifiedBy": "Gate Scanner #01-A",
-      "status": "VERIFIED"
+      "scannedAt": "2026-11-15T13:31:04.873Z",
+      "verifiedBy": "Gate Boom Barrier #1",
+      "status": "BARRIER_OPENED"
     }
   ],
   "reviews": []

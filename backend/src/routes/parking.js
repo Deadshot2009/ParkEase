@@ -19,7 +19,7 @@ router.get('/locations', (req, res) => {
 
       return {
         ...loc,
-        totalSlots: locSlots.length || loc.totalSlots,
+        totalSlots: locSlots.length,
         availableSlots: availableCount,
         occupiedSlots: bookedCount,
         evSlotsCount: evSlots,
@@ -64,6 +64,7 @@ router.get('/locations/:id', (req, res) => {
       success: true,
       data: {
         ...loc,
+        totalSlots: locSlots.length,
         availableSlots: availableCount,
         occupiedSlots: bookedCount,
         occupancyRate: locSlots.length ? Math.round((bookedCount / locSlots.length) * 100) : 0

@@ -3,15 +3,16 @@ import { useParams, Link } from 'react-router-dom';
 import { 
   SquareParking, 
   MapPin, 
+  Calendar, 
   Clock, 
-  CheckCircle2, 
+  Car, 
   Download, 
   Share2, 
-  Car, 
+  CheckCircle2, 
   ShieldCheck, 
   ArrowLeft,
-  Navigation,
-  QrCode as QrIcon
+  Zap,
+  Info
 } from 'lucide-react';
 import api from '../services/api';
 
@@ -24,6 +25,7 @@ export default function QRTicket() {
   useEffect(() => {
     const fetchBooking = async () => {
       try {
+        setLoading(true);
         const res = await api.get(`/bookings/${id}`);
         if (res.data.success) {
           setBooking(res.data.data);
@@ -37,22 +39,30 @@ export default function QRTicket() {
     fetchBooking();
   }, [id]);
 
-  const handleShare = () => {
-    if (navigator.clipboard) {
-      navigator.clipboard.writeText(window.location.href);
+  const handleShare = async () => {
+    try {
+      if (navigator.share && booking) {
+        await navigator.share({
+          title: `ParkEase Pass - Slot ${booking.slotNumber}`,
+          text: `My verified parking pass for ${booking.locationName} (Slot: ${booking.slotNumber}, Ref: ${booking.bookingReference})`,
+          url: window.location.href,
+        });
+      } else {
+        await navigator.clipboard.writeText(window.location.href);
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2500);
+      }
+    } catch {
+      await navigator.clipboard.writeText(window.location.href);
       setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
+      setTimeout(() => setCopied(false), 2500);
     }
-  };
-
-  const handlePrint = () => {
-    window.print();
   };
 
   if (loading) {
     return (
       <div className="min-h-screen text-white flex items-center justify-center">
-        <div className="w-10 h-10 border-4 border-emerald-500 border-t-transparent rounded-full animate-spin"></div>
+        <div className="w-10 h-10 border-4 border-indigo-500 border-t-transparent rounded-full animate-spin"></div>
       </div>
     );
   }
@@ -60,144 +70,145 @@ export default function QRTicket() {
   if (!booking) {
     return (
       <div className="min-h-screen text-white flex flex-col items-center justify-center p-4">
-        <h2 className="text-xl font-bold">Booking Pass Not Found</h2>
-        <Link to="/dashboard" className="mt-4 px-4 py-2 btn-emerald rounded-xl text-xs font-bold">
-          Return to Dashboard
+        <h2 className="text-lg font-bold">Booking Pass Not Found</h2>
+        <Link to="/dashboard" className="mt-4 px-4 py-2 rounded-xl btn-primary text-xs font-bold">
+          Back to Dashboard
         </Link>
       </div>
     );
   }
 
-  const qrString = booking.qrCodeData || JSON.stringify({
-    bookingRef: booking.bookingReference,
-    slotNumber: booking.slotNumber,
-    locationId: booking.locationId
-  });
+  const qrImageUrl = booking.qrDataUrl || `https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${encodeURIComponent(booking.bookingReference)}`;
 
   return (
     <div className="relative text-white py-12 px-4 sm:px-6 lg:px-8 pb-24">
-      <div className="max-w-md mx-auto relative z-10">
+      <div className="max-w-md mx-auto">
         
-        {/* Navigation back */}
+        {/* Navigation back & Share */}
         <div className="flex items-center justify-between mb-6">
           <Link
             to="/history"
-            className="inline-flex items-center text-xs font-bold text-slate-400 hover:text-white transition-colors"
+            className="inline-flex items-center text-xs font-bold text-slate-400 hover:text-white transition-colors gap-1.5"
           >
-            <ArrowLeft className="w-3.5 h-3.5 mr-1" /> My Reservations
+            <ArrowLeft className="w-4 h-4" /> My Bookings
           </Link>
-          <span className="text-xs font-bold text-emerald-400 flex items-center gap-1.5 bg-emerald-500/10 px-3 py-1 rounded-full border border-emerald-500/20">
-            <CheckCircle2 className="w-4 h-4" /> Verified & Active
-          </span>
+          <div className="flex items-center gap-2">
+            <button
+              onClick={handleShare}
+              className="p-1.5 px-2.5 rounded-xl glass-panel-subtle hover:bg-white/[0.08] text-xs font-bold text-slate-300 hover:text-cyan-300 border border-white/10 transition-colors flex items-center gap-1"
+              title="Share gate pass"
+            >
+              <Share2 className="w-3.5 h-3.5 text-cyan-400" />
+              <span>{copied ? 'Copied Link!' : 'Share'}</span>
+            </button>
+            <span className="text-xs font-bold text-cyan-400 bg-cyan-500/10 px-3 py-1 rounded-full border border-cyan-500/20">
+              {booking.bookingStatus} PASS
+            </span>
+          </div>
         </div>
 
-        {/* Digital Boarding Pass Ticket Card with Glassmorphism */}
-        <div className="glass-panel rounded-3xl border border-white/10 shadow-2xl overflow-hidden relative print:border-black print:text-black">
+        {/* Boarding Pass Styled Ticket Card */}
+        <div className="glass-panel rounded-3xl border border-white/10 shadow-2xl overflow-hidden relative">
           
-          {/* Ticket Header */}
-          <div className="bg-gradient-to-r from-emerald-500 via-[#00E676] to-teal-400 p-6 text-[#040711]">
+          {/* Top Notch Brand Header */}
+          <div className="bg-gradient-to-r from-indigo-600 via-indigo-700 to-cyan-600 p-6 text-white relative">
             <div className="flex items-center justify-between">
               <div className="flex items-center space-x-2">
-                <SquareParking className="w-6 h-6 stroke-[2.5]" />
-                <span className="font-black text-lg tracking-tight">ParkEase Pass</span>
+                <div className="w-8 h-8 rounded-lg bg-white/20 backdrop-blur-md flex items-center justify-center">
+                  <SquareParking className="w-5 h-5 text-white" />
+                </div>
+                <span className="text-lg font-black tracking-tight">ParkEase</span>
               </div>
-              <span className="font-mono text-xs font-bold uppercase bg-[#040711] text-emerald-400 px-3 py-1 rounded-full shadow-md">
-                {booking.bookingReference}
+              <span className="text-xs font-mono font-bold bg-white/20 px-2.5 py-1 rounded-full">
+                GATE PASS
               </span>
             </div>
 
-            <div className="mt-6 text-center">
-              <span className="text-[11px] font-bold uppercase tracking-widest text-[#040711]/75 block">
-                Reserved Parking Bay
-              </span>
-              <span className="text-5xl font-black font-mono tracking-tight text-[#040711] drop-shadow-sm">
-                {booking.slotNumber}
-              </span>
-              <span className="text-xs font-bold block text-[#040711]/90 mt-1">
-                {booking.floor} • {booking.slotType} Bay
-              </span>
+            <div className="mt-6 flex items-baseline justify-between">
+              <div>
+                <span className="text-[10px] text-white/70 uppercase tracking-widest font-bold">Designated Slot</span>
+                <p className="text-3xl font-black font-mono tracking-tight text-white mt-0.5">
+                  {booking.slotNumber}
+                </p>
+              </div>
+              <div className="text-right">
+                <span className="text-[10px] text-white/70 uppercase tracking-widest font-bold">Floor Level</span>
+                <p className="text-sm font-bold text-white mt-0.5">{booking.floor}</p>
+              </div>
             </div>
           </div>
 
-          {/* Ticket Perforation Notch effect */}
-          <div className="relative flex items-center justify-between bg-transparent px-2 py-1">
-            <div className="w-5 h-8 bg-[#040711] rounded-r-full -ml-4 border-r border-white/10"></div>
-            <div className="flex-1 border-b-2 border-dashed border-white/15 mx-2"></div>
-            <div className="w-5 h-8 bg-[#040711] rounded-l-full -mr-4 border-l border-white/10"></div>
+          {/* Ticket Body */}
+          <div className="p-6 space-y-5">
+            <div>
+              <h3 className="text-base font-bold text-white">{booking.locationName}</h3>
+              <p className="text-xs text-slate-400 flex items-center mt-1">
+                <MapPin className="w-3.5 h-3.5 mr-1 text-cyan-400 shrink-0" />
+                <span>{booking.locationAddress}</span>
+              </p>
+            </div>
+
+            <div className="grid grid-cols-2 gap-3 p-3.5 rounded-2xl bg-white/[0.02] border border-white/5 text-xs">
+              <div>
+                <span className="text-[10px] text-slate-400 uppercase font-semibold">Vehicle Plate</span>
+                <p className="font-mono font-black text-cyan-300 mt-0.5">{booking.vehicle?.plateNumber}</p>
+              </div>
+              <div>
+                <span className="text-[10px] text-slate-400 uppercase font-semibold">Reference Code</span>
+                <p className="font-mono font-bold text-white mt-0.5">{booking.bookingReference}</p>
+              </div>
+              <div>
+                <span className="text-[10px] text-slate-400 uppercase font-semibold">Valid From</span>
+                <p className="font-mono text-white mt-0.5">
+                  {new Date(booking.startTime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                </p>
+              </div>
+              <div>
+                <span className="text-[10px] text-slate-400 uppercase font-semibold">Valid Until</span>
+                <p className="font-mono text-white mt-0.5">
+                  {new Date(booking.endTime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                </p>
+              </div>
+            </div>
+
+            {/* Perforation Divider Line */}
+            <div className="relative py-2">
+              <div className="absolute -left-10 w-6 h-6 rounded-full bg-[#080C15] border-r border-white/10"></div>
+              <div className="absolute -right-10 w-6 h-6 rounded-full bg-[#080C15] border-l border-white/10"></div>
+              <div className="border-t-2 border-dashed border-white/15 w-full"></div>
+            </div>
+
+            {/* QR Code Container */}
+            <div className="text-center pt-2">
+              <div className="inline-block p-4 bg-white rounded-2xl shadow-xl shadow-cyan-500/10 border-4 border-cyan-400/30">
+                <img
+                  src={qrImageUrl}
+                  alt="Parking Gate QR"
+                  className="w-44 h-44 object-contain mx-auto"
+                />
+              </div>
+              <p className="text-xs font-bold text-slate-300 mt-4 flex items-center justify-center gap-1.5">
+                <ShieldCheck className="w-4 h-4 text-cyan-400" /> Scan at Gate Scanner Barrier
+              </p>
+              <p className="text-[10px] text-slate-500 mt-1 font-mono">
+                TOKEN: {booking.bookingReference} • SECURE
+              </p>
+            </div>
           </div>
 
-          {/* QR Code Container */}
-          <div className="p-6 text-center">
-            <div className="bg-white p-3.5 rounded-2xl inline-block shadow-2xl mx-auto border-4 border-emerald-500/20">
-              <img
-                src={booking.qrDataUrl || `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(qrString)}`}
-                alt="Gate Pass QR"
-                className="w-48 h-48 object-contain rounded-lg"
-              />
-            </div>
-            
-            <p className="text-xs font-semibold text-emerald-400 mt-4 flex items-center justify-center gap-1.5">
-              <QrIcon className="w-4 h-4" />
-              <span>Scan this QR at the entrance boom barrier</span>
-            </p>
-          </div>
-
-          {/* Details Section */}
-          <div className="p-6 pt-0 space-y-3.5 text-xs">
-            <div className="p-4 bg-[#040711]/70 rounded-2xl border border-white/10 space-y-2.5">
-              <div className="flex justify-between items-start">
-                <span className="text-slate-400">Location:</span>
-                <span className="font-bold text-white text-right max-w-[200px]">{booking.locationName}</span>
-              </div>
-
-              <div className="flex justify-between items-center">
-                <span className="text-slate-400">Vehicle:</span>
-                <span className="font-mono font-bold text-emerald-400">
-                  {booking.vehicle?.plateNumber}
-                </span>
-              </div>
-
-              <div className="flex justify-between items-center">
-                <span className="text-slate-400">Valid Window:</span>
-                <span className="text-slate-200 font-medium">
-                  {new Date(booking.startTime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })} - {new Date(booking.endTime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
-                </span>
-              </div>
-
-              <div className="flex justify-between items-center pt-2.5 border-t border-white/[0.08]">
-                <span className="text-slate-400">Payment:</span>
-                <span className="text-emerald-400 font-bold font-mono">
-                  PAID ₹{booking.totalAmount} ({booking.paymentMethod})
-                </span>
-              </div>
-            </div>
-
-            {/* Action buttons */}
-            <div className="grid grid-cols-2 gap-2 pt-1">
-              <button
-                onClick={handlePrint}
-                className="py-2.5 px-3 rounded-xl glass-panel-subtle hover:bg-white/[0.08] text-xs font-bold text-white border border-white/10 flex items-center justify-center gap-1.5 transition-colors"
-              >
-                <Download className="w-3.5 h-3.5" />
-                <span>Save Pass</span>
-              </button>
-
-              <button
-                onClick={handleShare}
-                className="py-2.5 px-3 rounded-xl glass-panel-subtle hover:bg-white/[0.08] text-xs font-bold text-white border border-white/10 flex items-center justify-center gap-1.5 transition-colors"
-              >
-                <Share2 className="w-3.5 h-3.5" />
-                <span>{copied ? 'Link Copied!' : 'Share Pass'}</span>
-              </button>
-            </div>
-
-            {/* Gate scanner simulator link */}
-            <Link
-              to={`/gate-scanner?ref=${booking.bookingReference}`}
-              className="w-full py-3 rounded-xl bg-emerald-500/15 hover:bg-emerald-500/25 text-emerald-400 text-xs font-bold border border-emerald-500/30 flex items-center justify-center gap-2 transition-all mt-3"
+          {/* Ticket Footer Action - Connected Test Scanner with Pre-filled Ref */}
+          <div className="p-4 bg-white/[0.02] border-t border-white/[0.08] flex items-center justify-between text-xs">
+            <button
+              onClick={() => window.print()}
+              className="flex items-center gap-1.5 text-cyan-400 hover:text-cyan-300 font-bold transition-colors"
             >
-              <QrIcon className="w-4 h-4" />
-              <span>Simulate Gate Barrier Scan</span>
+              <Download className="w-4 h-4" /> Download / Print Pass
+            </button>
+            <Link
+              to={`/gate-scanner?ref=${encodeURIComponent(booking.bookingReference)}`}
+              className="px-3.5 py-1.5 rounded-xl btn-primary font-bold text-[11px] flex items-center gap-1 shadow-md"
+            >
+              <span>Test Scanner</span>
             </Link>
           </div>
 

@@ -1,4 +1,5 @@
-import { localDB, isUsingMongoDB } from '../config/db.js';
+import { localDB, isUsingMongoDB, getSQLiteDB } from '../config/db.js';
+import { saveDocToSQLite, removeDocFromSQLite, exportSQLiteToJSON } from '../config/sqlite.js';
 import { getInitialData } from '../seed/seedData.js';
 
 // Global in-memory lock registry for concurrency & idempotency
@@ -30,7 +31,7 @@ export const initDataStore = () => {
     localDB.data.payments = initial.payments;
     localDB.data.entryLogs = initial.entryLogs;
     localDB.save();
-    console.log('[ParkEase DB] Initialized rich seed data with locations, slots, demo users, and bookings.');
+    console.log('[ParkEase SQLite] Initialized rich seed data with locations, slots, demo users, and bookings.');
   } else {
     // Run integrity cleanup
     cleanupDuplicates();
@@ -141,7 +142,7 @@ export const cleanupDuplicates = () => {
 
   if (cleaned > 0) {
     localDB.save();
-    console.log(`[ParkEase DB] Purged ${cleaned} duplicate record(s) across database collections.`);
+    console.log(`[ParkEase SQLite] Purged ${cleaned} duplicate record(s) across database collections.`);
   }
 };
 
@@ -154,11 +155,13 @@ export const saveDB = () => {
 };
 
 export const findOne = (collectionName, predicate) => {
+  localDB.load();
   const coll = localDB.getCollection(collectionName);
   return coll.find(predicate) || null;
 };
 
 export const findMany = (collectionName, predicate) => {
+  localDB.load();
   const coll = localDB.getCollection(collectionName);
   if (!predicate) return [...coll];
   return coll.filter(predicate);
@@ -203,7 +206,8 @@ export const insertOne = (collectionName, item) => {
   }
 
   coll.unshift(item);
-  localDB.save();
+  saveDocToSQLite(collectionName, item);
+  exportSQLiteToJSON();
   return item;
 };
 
@@ -212,7 +216,8 @@ export const updateOne = (collectionName, predicate, updates) => {
   const idx = coll.findIndex(predicate);
   if (idx !== -1) {
     coll[idx] = { ...coll[idx], ...updates, updatedAt: new Date().toISOString() };
-    localDB.save();
+    saveDocToSQLite(collectionName, coll[idx]);
+    exportSQLiteToJSON();
     return coll[idx];
   }
   return null;
@@ -223,8 +228,24 @@ export const deleteOne = (collectionName, predicate) => {
   const idx = coll.findIndex(predicate);
   if (idx !== -1) {
     const removed = coll.splice(idx, 1)[0];
-    localDB.save();
+    removeDocFromSQLite(collectionName, removed._id);
+    exportSQLiteToJSON();
     return removed;
   }
   return null;
+};
+
+/**
+ * Direct SQL query execution against SQLite database
+ */
+export const querySQL = (sql, params = []) => {
+  const db = getSQLiteDB();
+  const stmt = db.prepare(sql);
+  return stmt.all(...params);
+};
+
+export const executeSQL = (sql, params = []) => {
+  const db = getSQLiteDB();
+  const stmt = db.prepare(sql);
+  return stmt.run(...params);
 };

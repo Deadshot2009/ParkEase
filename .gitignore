@@ -33,3 +33,8 @@ build/
 Thumbs.db
 
 *.zip
+.vercel
+
+# SQLite journal files
+*.sqlite-wal
+*.sqlite-shm

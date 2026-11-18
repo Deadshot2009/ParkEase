@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: parkease
+    env: node
+    plan: free
+    region: oregon
+    buildCommand: npm run build
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 5000
+      - key: JWT_SECRET
+        generateValue: true
+      - key: ADMIN_EMAIL
+        value: asjeevaaslm@gmail.com,admin@parkease.com,asjeevaa@gmail.com
+      - key: ADMIN_PASSWORD
+        value: 123456789
