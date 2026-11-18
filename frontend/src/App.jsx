@@ -53,6 +53,16 @@ const AdminRoute = ({ children }) => {
   return children;
 };
 
+// Automatic port-aware routing: When visited on port 3001, route directly to Admin portal
+const AdminPortRedirect = ({ children }) => {
+  const location = useLocation();
+  const isAdminPort = window.location.port === '3001';
+  if (isAdminPort && location.pathname === '/') {
+    return <Navigate to="/admin" replace />;
+  }
+  return children;
+};
+
 export default function App() {
   return (
     <AuthProvider>
@@ -73,7 +83,7 @@ export default function App() {
             
             <main className="flex-1">
               <Routes>
-                <Route path="/" element={<LandingPage />} />
+                <Route path="/" element={<AdminPortRedirect><LandingPage /></AdminPortRedirect>} />
                 <Route path="/dashboard" element={<Dashboard />} />
                 <Route path="/parking/:id" element={<ParkingDetail />} />
                 <Route path="/ticket/:id" element={<QRTicket />} />
