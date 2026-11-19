@@ -1,31 +1,41 @@
+
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import mongoose from 'mongoose';
 import bcrypt from 'bcryptjs';
 import { v4 as uuidv4 } from 'uuid';
+
 import {
   initSQLite,
   getSQLiteDB,
   SQLITE_DB_PATH,
   loadCollectionFromSQLite,
   saveDocToSQLite,
-  removeDocFromSQLite,
   exportSQLiteToJSON,
-  TABLE_MAP,
 } from './sqlite.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-const DATA_DIR = process.env.VERCEL ? '/tmp' : path.join(__dirname, '../data');
+
+// --------------------------------------------------
+// DATABASE CONFIGURATION
+// --------------------------------------------------
+
+const DATA_DIR = process.env.VERCEL
+  ? '/tmp'
+  : path.join(__dirname, '../data');
+
 const DB_FILE = path.join(DATA_DIR, 'parkease_db.json');
 
-// Ensure data directory exists
 if (!fs.existsSync(DATA_DIR)) {
   fs.mkdirSync(DATA_DIR, { recursive: true });
 }
 
-// Database state with high-speed memory cache and SQLite backing
+// --------------------------------------------------
+// DATABASE MANAGER
+// --------------------------------------------------
+
 class DatabaseManager {
   constructor() {
     this.data = {
@@ -42,125 +52,220 @@ class DatabaseManager {
 
   load() {
     try {
-      const collections = Object.keys(this.data);
-      for (const coll of collections) {
-        this.data[coll] = loadCollectionFromSQLite(coll);
+      for (const collection of Object.keys(this.data)) {
+        const records = loadCollectionFromSQLite(collection);
+
+        this.data[collection] = Array.isArray(records)
+          ? records
+          : [];
       }
-    } catch (err) {
-      console.error('[ParkEase DB] Error loading collections from storage:', err.message);
+
+      console.log('[ParkEase DB] Collections loaded successfully.');
+    } catch (error) {
+      console.error(
+        '[ParkEase DB] Load error:',
+        error.message
+      );
+
+      throw error;
     }
   }
 
   save() {
     try {
-      for (const [coll, items] of Object.entries(this.data)) {
-        if (Array.isArray(items)) {
-          for (const item of items) {
-            saveDocToSQLite(coll, item);
-          }
+      for (const [collection, items] of Object.entries(this.data)) {
+        if (!Array.isArray(items)) {
+          continue;
+        }
+
+        for (const item of items) {
+          saveDocToSQLite(collection, item);
         }
       }
+
       exportSQLiteToJSON();
-    } catch (err) {
-      console.error('[ParkEase DB] Error saving to storage:', err.message);
+
+      return true;
+    } catch (error) {
+      console.error(
+        '[ParkEase DB] Save error:',
+        error.message
+      );
+
+      throw error;
     }
   }
 
   getCollection(name) {
-    if (!this.data[name]) {
-      this.data[name] = loadCollectionFromSQLite(name) || [];
+    if (!Array.isArray(this.data[name])) {
+      const records = loadCollectionFromSQLite(name);
+
+      this.data[name] = Array.isArray(records)
+        ? records
+        : [];
     }
+
     return this.data[name];
   }
 }
 
 export const localDB = new DatabaseManager();
+
 export let isUsingMongoDB = false;
 export let isUsingSQLite = true;
 
-/**
- * Seed or verify designated Admin account(s) on startup
- */
+// --------------------------------------------------
+// ADMIN CONFIGURATION
+// --------------------------------------------------
+
 export const seedAdminAccounts = async () => {
-  const adminEmailsEnv = process.env.ADMIN_EMAIL || 'asjeevaaslm@gmail.com,admin@parkease.com,asjeevaa@gmail.com';
-  const adminEmails = adminEmailsEnv.split(',').map(e => e.trim().toLowerCase()).filter(Boolean);
-  const defaultPassword = process.env.ADMIN_PASSWORD || '123456789';
+  const adminEmailsEnv = process.env.ADMIN_EMAIL;
+
+  if (!adminEmailsEnv) {
+    console.warn(
+      '[ParkEase Auth] ADMIN_EMAIL environment variable is not configured.'
+    );
+    return;
+  }
+
+  const adminEmails = [
+    ...new Set(
+      adminEmailsEnv
+        .split(',')
+        .map((email) => email.trim().toLowerCase())
+        .filter(Boolean)
+    ),
+  ];
+
+  const defaultPassword = process.env.ADMIN_PASSWORD;
+
+  if (!defaultPassword || defaultPassword.length < 10) {
+    throw new Error(
+      'ADMIN_PASSWORD must be configured with at least 10 characters.'
+    );
+  }
 
   const users = localDB.getCollection('users');
 
   for (const email of adminEmails) {
-    let existing = users.find(u => (u.email || '').toLowerCase().trim() === email);
-    const salt = await bcrypt.genSalt(10);
-    const passwordHash = await bcrypt.hash(defaultPassword, salt);
+    const existing = users.find(
+      (user) =>
+        (user.email || '').trim().toLowerCase() === email
+    );
 
     if (existing) {
-      existing.role = 'admin';
-      existing.passwordHash = passwordHash;
-      existing.mustChangePassword = true; // Temporary password must be changed
-      existing.updatedAt = new Date().toISOString();
-      saveDocToSQLite('users', existing);
-      console.log(`[ParkEase Auth] Designated ADMIN account verified & password reset to temporary: ${email}`);
-    } else {
-      // Create new Admin user
-      const newAdmin = {
-        _id: `usr_admin_${uuidv4().substring(0, 8)}`,
-        name: email.includes('asjeeva') ? 'Jeevaa A S (Owner)' : 'ParkEase Administrator',
-        email: email,
-        passwordHash: passwordHash,
-        phone: '+91 9876543210',
-        role: 'admin',
-        mustChangePassword: true,
-        avatar: '',
-        vehicles: [],
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString(),
-      };
-      users.unshift(newAdmin);
-      saveDocToSQLite('users', newAdmin);
-      console.log(`[ParkEase Auth] Seeded designated ADMIN account with temporary password: ${email}`);
+      // Preserve existing password.
+      // Only ensure the configured account has admin role.
+      if (existing.role !== 'admin') {
+        existing.role = 'admin';
+        existing.updatedAt = new Date().toISOString();
+
+        saveDocToSQLite('users', existing);
+
+        console.log(
+          `[ParkEase Auth] Admin role verified: ${email}`
+        );
+      }
+
+      continue;
     }
+
+    // Create a new admin only if account does not exist.
+    const salt = await bcrypt.genSalt(12);
+
+    const passwordHash = await bcrypt.hash(
+      defaultPassword,
+      salt
+    );
+
+    const newAdmin = {
+      _id: `usr_admin_${uuidv4().substring(0, 8)}`,
+      name: 'ParkEase Administrator',
+      email,
+      passwordHash,
+      phone: '',
+      role: 'admin',
+      mustChangePassword: true,
+      avatar: '',
+      vehicles: [],
+      favorites: [],
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
+    };
+
+    users.unshift(newAdmin);
+
+    saveDocToSQLite('users', newAdmin);
+
+    console.log(
+      `[ParkEase Auth] New admin account created: ${email}`
+    );
   }
+
   exportSQLiteToJSON();
 };
 
-/**
- * Connect to database:
- * 1. Initializes SQLite persistent engine.
- * 2. Attempts MongoDB Atlas / local connection if MONGODB_URI is provided.
- * 3. Seeds Admin accounts.
- */
+// --------------------------------------------------
+// CONNECT DATABASE
+// --------------------------------------------------
+
+let connectionPromise = null;
+
 export const connectDB = async () => {
-  try {
-    // 1. Initialize SQLite
-    initSQLite();
-    localDB.load();
-    console.log(`\n======================================================`);
-    console.log(`[ParkEase DB] Primary Persistent SQLite Engine Active`);
-    console.log(`[ParkEase DB] Path: ${SQLITE_DB_PATH}`);
-    console.log(`[ParkEase DB] Collections: users, locations, slots, bookings, payments, entry_logs`);
-
-    // 2. Attempt MongoDB connection if configured
-    const mongoURI = process.env.MONGODB_URI;
-    if (mongoURI) {
-      try {
-        mongoose.set('strictQuery', false);
-        await mongoose.connect(mongoURI, { serverSelectionTimeoutMS: 2000 });
-        isUsingMongoDB = true;
-        console.log(`[ParkEase DB] Connected to MongoDB Atlas: ${mongoURI}`);
-      } catch (mErr) {
-        isUsingMongoDB = false;
-        console.log(`[ParkEase DB] MongoDB not reachable (${mErr.message}). Seamlessly running on SQLite engine.`);
-      }
-    }
-
-    // 3. Seed Admin accounts securely
-    await seedAdminAccounts();
-
-    console.log(`======================================================\n`);
-  } catch (err) {
-    console.error('[ParkEase DB] Initialization error:', err);
-    throw err;
+  if (connectionPromise) {
+    return connectionPromise;
   }
+
+  connectionPromise = (async () => {
+    try {
+      // 1. Initialize SQLite
+      initSQLite();
+
+      // 2. Load existing database records
+      localDB.load();
+
+      console.log('');
+      console.log('============================================');
+      console.log('[ParkEase DB] SQLite database initialized.');
+      console.log(`[ParkEase DB] Database path: ${SQLITE_DB_PATH}`);
+
+      // 3. SQLite is the active storage engine.
+      // MongoDB is NOT enabled here because DatabaseManager
+      // currently uses SQLite operations only.
+
+      isUsingMongoDB = false;
+      isUsingSQLite = true;
+
+      console.log('[ParkEase DB] Active engine: SQLite');
+
+      // 4. Seed or verify admin accounts
+      await seedAdminAccounts();
+
+      console.log('[ParkEase DB] Initialization completed.');
+      console.log('============================================');
+      console.log('');
+
+      return true;
+    } catch (error) {
+      connectionPromise = null;
+
+      console.error(
+        '[ParkEase DB] Initialization failed:',
+        error
+      );
+
+      throw error;
+    }
+  })();
+
+  return connectionPromise;
 };
 
-export { getSQLiteDB, SQLITE_DB_PATH };
+// --------------------------------------------------
+// DATABASE EXPORTS
+// --------------------------------------------------
+
+export {
+  getSQLiteDB,
+  SQLITE_DB_PATH,
+};
