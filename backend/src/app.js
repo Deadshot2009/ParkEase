@@ -34,6 +34,8 @@ initSocket(io);
 const allowedOrigins = [
   'http://localhost:3000',
   'http://127.0.0.1:3000',
+  'http://localhost:3001',
+  'http://127.0.0.1:3001',
   'http://localhost:5000',
   process.env.FRONTEND_URL
 ].filter(Boolean);
@@ -41,7 +43,14 @@ const allowedOrigins = [
 app.use(cors({
   origin: (origin, callback) => {
     // allow requests with no origin (like mobile apps or curl) or matching origins
-    if (!origin || allowedOrigins.includes(origin) || origin.startsWith('http://localhost:') || origin.startsWith('http://127.0.0.1:')) {
+    if (
+      !origin || 
+      allowedOrigins.includes(origin) || 
+      origin.startsWith('http://localhost:') || 
+      origin.startsWith('http://127.0.0.1:') ||
+      origin.endsWith('.vercel.app') ||
+      origin.endsWith('.onrender.com')
+    ) {
       return callback(null, true);
     }
     return callback(null, true);

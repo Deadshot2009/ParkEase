@@ -5,13 +5,23 @@ import { DatabaseSync } from 'node:sqlite';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-const DATA_DIR = path.join(__dirname, '../data');
+const DATA_DIR = process.env.VERCEL ? '/tmp' : path.join(__dirname, '../data');
 export const SQLITE_DB_PATH = path.join(DATA_DIR, 'parkease.sqlite');
+const SEED_BACKUP_PATH = path.join(__dirname, '../data/parkease_db.json');
 const JSON_BACKUP_PATH = path.join(DATA_DIR, 'parkease_db.json');
 
 // Ensure data directory exists
 if (!fs.existsSync(DATA_DIR)) {
   fs.mkdirSync(DATA_DIR, { recursive: true });
+}
+
+// In Vercel serverless environment, copy seed database into writable /tmp
+if (process.env.VERCEL && !fs.existsSync(JSON_BACKUP_PATH) && fs.existsSync(SEED_BACKUP_PATH)) {
+  try {
+    fs.copyFileSync(SEED_BACKUP_PATH, JSON_BACKUP_PATH);
+  } catch (copyErr) {
+    console.warn('[ParkEase SQLite] Failed to copy seed backup to /tmp:', copyErr.message);
+  }
 }
 
 let dbInstance = null;
